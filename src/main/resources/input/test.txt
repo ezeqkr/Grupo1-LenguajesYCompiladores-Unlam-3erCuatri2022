@@ -1,1 +1,3 @@
-c=d*(e-21)/4
+c=d*(e-21)/4 
+/*This is a comment*/
+/*esto es un comentario*/
