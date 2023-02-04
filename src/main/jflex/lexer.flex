@@ -59,7 +59,7 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
   {Identifier}                             { return symbol(ParserSym.IDENTIFIER, yytext()); }
   /* Constants */
   {IntegerConstant}                        { return symbol(ParserSym.INTEGER_CONSTANT, yytext()); }
-  /* Constants */
+  /* Comments */
   {Comment}                                { return symbol(ParserSym.COMMENT, yytext()); }
 
   /* operators */
