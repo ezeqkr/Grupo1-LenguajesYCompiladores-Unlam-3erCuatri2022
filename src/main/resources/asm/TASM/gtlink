@@ -1,0 +1,7 @@
+[autoexec]
+@echo off
+mount C: "C:\Program Files (x86)\GUI Turbo Assembler\BIN"
+C:
+cls
+tlink.exe /3 Final.obj numbers.obj /v /s /m Final >gtlink.log
+exit

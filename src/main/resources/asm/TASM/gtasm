@@ -1,0 +1,7 @@
+[autoexec]
+@echo off
+mount C: "C:\Program Files (x86)\GUI Turbo Assembler\BIN"
+C:
+cls
+tasm.exe Final.asm >gtasm.log
+exit
