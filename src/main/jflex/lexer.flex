@@ -43,9 +43,11 @@ CloseBracket = ")"
 Letter = [a-zA-Z]
 Digit = [0-9]
 
+
 WhiteSpace = {LineTerminator} | {Identation}
 Identifier = {Letter} ({Letter}|{Digit})*
 IntegerConstant = {Digit}+
+Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
 %%
 
@@ -57,6 +59,8 @@ IntegerConstant = {Digit}+
   {Identifier}                             { return symbol(ParserSym.IDENTIFIER, yytext()); }
   /* Constants */
   {IntegerConstant}                        { return symbol(ParserSym.INTEGER_CONSTANT, yytext()); }
+  /* Constants */
+  {Comment}                                { return symbol(ParserSym.COMMENT, yytext()); }
 
   /* operators */
   {Plus}                                    { return symbol(ParserSym.PLUS); }
