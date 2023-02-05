@@ -37,9 +37,19 @@ Plus = "+"
 Mult = "*"
 Sub = "-"
 Div = "/"
+Equal= "==" 
+NotEqual = "=!"
 Assig = "="
 OpenBracket = "("
 CloseBracket = ")"
+GreaterEqual = ">=" 
+Greater = ">"
+LessEqual= "<=" 
+Less = "<"
+
+
+
+//Conjuntos
 Letter = [a-zA-Z]
 Digit = [0-9]
 
