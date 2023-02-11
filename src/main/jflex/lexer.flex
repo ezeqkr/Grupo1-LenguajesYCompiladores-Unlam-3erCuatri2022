@@ -78,12 +78,14 @@ Identation =  [ \t\f]
 //Texto_Invalido = [^{CARACTER} 	\n]
 
 CTE_String = \"([^\"\\\\]|\\\\.)*\"
-//CTE_Float = ({DIGITO}+"."{DIGITO}+)|("."{DIGITO}+)|({DIGITO}+".")
-CTE_Int = ({DIGITO}+)|("-"{DIGITO}+)
+//floatConstant = ({Digit})"."({Digit})
+//({DIGITO}+"."{DIGITO}+)|("."{DIGITO}+)|({DIGITO}+".")
+//CTE_Int = ({Digit}+)|("-"{Digit}+)
 
 WhiteSpace = {LineTerminator} | {Identation}
 Identifier = {Letter} ({Letter}|{Digit}|_)*
-IntegerConstant = {Digit}+
+IntegerConstant = {Digit}+|{Digit}*
+floatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+
 Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
 
@@ -97,7 +99,8 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
   {Identifier}                             { return symbol(ParserSym.IDENTIFIER, yytext()); }
   /* Constants */
   {IntegerConstant}                        { return symbol(ParserSym.INTEGER_CONSTANT, yytext()); }
-  //{CTE_Float}                              { return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
+  {floatConstant}                           { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
+  
   {CTE_String}                             { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
   /* keywords */
   {while}                                  { return symbol(ParserSym.WHILE); }
