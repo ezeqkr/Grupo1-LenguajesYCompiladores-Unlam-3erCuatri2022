@@ -40,7 +40,7 @@ public class SimbolRow {
         if (valor == null) {
             return "";
         }
-        return valor;
+        return valor; 
     }
 
     public void setValor(String valor) {

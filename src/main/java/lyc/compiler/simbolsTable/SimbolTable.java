@@ -7,7 +7,7 @@ public class SimbolTable {
 
   // El constructor es privado, no permite que se genere un constructor por defecto.
   private SimbolTable() {
-      this.simbols = new ArrayList<SimbolRow>();
+      this.simbols = new ArrayList<SimbolRow>(); 
       System.out.println("Inicializando Tabla de Simbolos!");
   }
 
