@@ -85,7 +85,7 @@ CTE_String = \"([^\"\\\\]|\\\\.)*\"
 WhiteSpace = {LineTerminator} | {Identation}
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {Digit}+|{Digit}*
-floatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+
+//floatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+
 Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
 
@@ -99,7 +99,7 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
   {Identifier}                             { return symbol(ParserSym.IDENTIFIER, yytext()); }
   /* Constants */
   {IntegerConstant}                        { return symbol(ParserSym.INTEGER_CONSTANT, yytext()); }
-  {floatConstant}                           { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
+  //{floatConstant}                           { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
   
   {CTE_String}                             { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
   /* keywords */
