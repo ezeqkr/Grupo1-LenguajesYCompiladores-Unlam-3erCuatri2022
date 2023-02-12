@@ -2,33 +2,28 @@ package lyc.compiler.validations;
 
 public class Validate {
 
-    // falta generar metodo switch y arreglar los metodos con las funciones de java.
-
-    public static void validateInt(char[] yytext) {
-        String cad = yytext.toString();
-        int entero = Integer.parseInt(cad);
+    public static void validateInt(String yytext) {
+        int entero = Integer.parseInt(yytext);
         if (entero < -32768 || entero > 32767) {
-            System.out.println("\nERROR LEXICO : Rango entero Invalido (16 bits con signo):" + cad + " \n");
+            System.out.println("\nERROR LEXICO : Rango entero Invalido (16 bits con signo):" + yytext + " \n");
             System.exit(0);
         }
     }
 
-    public static void validateFloat(char[] yytext) {
-        String cad = yytext.toString();
-        float flotante = Float.parseFloat(cad);
+    public static void validateFloat(String yytext) {
+        float flotante = Float.parseFloat(yytext);
         long cota_i = -2147483648;
         long cota_s = 2147483647;
         if (flotante <= cota_i || flotante >= cota_s) {
-            System.out.println("\nERROR LEXICO : Rango reales Invalido (32 bits):" + cad + "%s\n");
+            System.out.println("\nERROR LEXICO : Rango reales Invalido (32 bits):" + yytext + "%s\n");
             System.exit(0);
         }
     }
 
-    public static void validateString(char[] yytext) {
-        String cad = yytext.toString();
-        int cadena = cad.length();
+    public static void validateString(String yytext) {
+        int cadena = yytext.length();
         if (cadena > 30) {
-            System.out.println("\nERROR LEXICO : Longitud String Invalido ( 30 caracteres ):" + cad + " %s\n");
+            System.out.println("\nERROR LEXICO : Longitud String Invalido ( 30 caracteres ):" + yytext + " %s\n");
             System.exit(0);
         }
     }

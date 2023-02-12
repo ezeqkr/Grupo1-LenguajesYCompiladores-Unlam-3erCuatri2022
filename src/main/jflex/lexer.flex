@@ -9,7 +9,6 @@ import lyc.compiler.simbolsTable.SimbolRow;
 
 %%
 
-
 %public
 %class Lexer
 %unicode
