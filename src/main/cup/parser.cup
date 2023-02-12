@@ -53,6 +53,11 @@ non terminal assignment;
 non terminal expression;
 non terminal term;
 non terminal factor;
+non terminal while;
+non terminal write;
+non terminal if;
+non terminal read;
+non terminal init;
 
 // Start Symbol Definition
 start with block;
@@ -70,4 +75,4 @@ term ::= factor {: System.out.println("Term = factor"); :};
 factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); :};
 factor ::= INTEGER_CONSTANT:constant {: System.out.println("Constant: " + constant ); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
-
+sentence ::= while 
