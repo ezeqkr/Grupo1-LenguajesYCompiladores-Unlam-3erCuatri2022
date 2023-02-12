@@ -91,7 +91,7 @@ Identation =  [ \t\f]
 
 CTE_String = \"([^\"\\\\]|\\\\.)*\"
 //floatConstant = ({Digit})"."({Digit})
-//({DIGITO}+"."{DIGITO}+)|("."{DIGITO}+)|({DIGITO}+".")
+//floatConstant = ({DIGITO}+"."{DIGITO}+)|("."{DIGITO}+)|({DIGITO}+".")
 //CTE_Int = ({Digit}+)|("-"{Digit}+)
 
 WhiteSpace = {LineTerminator} | {Identation}
