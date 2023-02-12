@@ -4,8 +4,11 @@ import java_cup.runtime.Symbol;
 import lyc.compiler.ParserSym;
 import lyc.compiler.model.*;
 import static lyc.compiler.constants.Constants.*;
+import lyc.compiler.simbolsTable.SimbolTable;
+import lyc.compiler.simbolsTable.SimbolRow;
 
 %%
+
 
 %public
 %class Lexer
@@ -18,13 +21,22 @@ import static lyc.compiler.constants.Constants.*;
   return symbol(ParserSym.EOF);
 %eofval}
 
+%{ 
+  SimbolTable simbolTable = SimbolTable.getSingletonInstance();
+%}
 
 %{
   private Symbol symbol(int type) {
     return new Symbol(type, yyline, yycolumn);
   }
-  private Symbol symbol(int type, Object value) {
+
+  private Symbol symbol(int type, Object value) {        
     return new Symbol(type, yyline, yycolumn, value);
+  }
+
+  private void addSymbol(String id, Object value) {  
+    SimbolRow simbolRow = new SimbolRow(id, value.toString(),"",0);
+    simbolTable.setSimbol(simbolRow);
   }
 %}
 
@@ -96,10 +108,17 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
 <YYINITIAL> {
   /* identifiers */
-  {Identifier}                             { return symbol(ParserSym.IDENTIFIER, yytext()); }
+  {Identifier}                             { 
+                                              // Validator.validateSymbol(ParserSym.IDENTIFIER, yytext());
+                                              addSymbol("IDENTIFIER", yytext()); 
+                                              return symbol(ParserSym.IDENTIFIER, yytext());
+                                           }
   /* Constants */
-  {IntegerConstant}                        { return symbol(ParserSym.INTEGER_CONSTANT, yytext()); }
-  //{floatConstant}                           { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
+  {IntegerConstant}                        { 
+                                             addSymbol("INTEGER_CONSTANT", yytext()); 
+                                             return symbol(ParserSym.INTEGER_CONSTANT, yytext()); 
+                                           }
+  //{floatConstant}                        { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
   
   {CTE_String}                             { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
   /* keywords */
