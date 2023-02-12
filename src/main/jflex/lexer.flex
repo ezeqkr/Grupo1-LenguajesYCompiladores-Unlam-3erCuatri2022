@@ -4,8 +4,8 @@ import java_cup.runtime.Symbol;
 import lyc.compiler.ParserSym;
 import lyc.compiler.model.*;
 import static lyc.compiler.constants.Constants.*;
-import lyc.compiler.simbolsTable.SimbolTable;
-import lyc.compiler.simbolsTable.SimbolRow;
+//import lyc.compiler.simbolsTable.SimbolTable;
+//import lyc.compiler.simbolsTable.SimbolRow;
 
 %%
 
@@ -20,11 +20,11 @@ import lyc.compiler.simbolsTable.SimbolRow;
 %eofval{
   return symbol(ParserSym.EOF);
 %eofval}
-
+/*
 %{ 
   SimbolTable simbolTable = SimbolTable.getSingletonInstance();
 %}
-
+*/
 %{
   private Symbol symbol(int type) {
     return new Symbol(type, yyline, yycolumn);
@@ -33,11 +33,12 @@ import lyc.compiler.simbolsTable.SimbolRow;
   private Symbol symbol(int type, Object value) {        
     return new Symbol(type, yyline, yycolumn, value);
   }
-
+/*
   private void addSymbol(String id, Object value) {  
     SimbolRow simbolRow = new SimbolRow(id, value.toString(),"",0);
     simbolTable.setSimbol(simbolRow);
   }
+  */
 %}
 
 
@@ -51,10 +52,6 @@ else = "else" | "ELSE"
 Init = "init" | "INIT"
 Read = "read" | "READ"
 
-Plus = "+"
-Mult = "*"
-Sub = "-"
-Div = "/"
 Percent = "%"
 Assig = "="
 OpenBracket = "("
@@ -83,23 +80,28 @@ singlequot = "\'"
 //Conjuntos
 Letter = [a-zA-Z]
 Digit = [0-9]
+DigitSC = [1-9]
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 Identation =  [ \t\f]
-//SpecialCar = [!@#$%^&*()\-=_+[]{}|;':,./<>?]  // no se si esta anda bien..
-//Texto_Invalido = [^{CARACTER} 	\n]
-
-CTE_String = \"([^\"\\\\]|\\\\.)*\"
-//floatConstant = ({Digit})"."({Digit})
-//({DIGITO}+"."{DIGITO}+)|("."{DIGITO}+)|({DIGITO}+".")
-//CTE_Int = ({Digit}+)|("-"{Digit}+)
-
 WhiteSpace = {LineTerminator} | {Identation}
+SpecialCar = [><:\+\-\*,\/@\%\.\[\];\(\)= ¿¡!]
+Character = {Letter} | {Digit}| {WhiteSpace} | {SpecialCar}
+Texto_Invalido = [^\{Character}\n]
+
+
+
 Identifier = {Letter} ({Letter}|{Digit}|_)*
-IntegerConstant = {Digit}+|{Digit}*
-//floatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+
+IntegerConstant = {DigitSC}{Digit}*|0
+FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
+StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
+
 Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
+Plus = "+"
+Mult = "*"
+Sub = "-"
+Div = "/"
 
 %%
 
@@ -109,18 +111,18 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 <YYINITIAL> {
   /* identifiers */
   {Identifier}                             { 
-                                              // Validator.validateSymbol(ParserSym.IDENTIFIER, yytext());
-                                              addSymbol("IDENTIFIER", yytext()); 
+                                              /*Validator.validateSymbol(ParserSym.IDENTIFIER, yytext());*/
+                                              /*addSymbol("IDENTIFIER", yytext()); */
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
   /* Constants */
   {IntegerConstant}                        { 
-                                             addSymbol("INTEGER_CONSTANT", yytext()); 
-                                             return symbol(ParserSym.INTEGER_CONSTANT, yytext()); 
+                                             //addSymbol("INTEGER_CONSTANT", yytext()); 
+                                             return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
-  //{floatConstant}                        { return symbol(ParserSym.INTEGER_FLOAT, yytext()); }
+  {FloatConstant}                          { return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
   
-  {CTE_String}                             { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
+  {StringConstant}                         { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
   /* keywords */
   {while}                                  { return symbol(ParserSym.WHILE); }
   {write}                                  { return symbol(ParserSym.WRITE); }
@@ -160,12 +162,11 @@ Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
   /* whitespace */
   {WhiteSpace}                             { /* ignore */ }
-  {Comment}                                { /* ignore */}
-  //{SpecialCar}                             { throw new UnknownCharacterException(yytext()); }
-  //{Texto_Invalido}                         { throw new UnknownCharacterException(yytext()); }
+  {Comment}                                { /* ignore */ }
 
 }
 
 
 /* error fallback */
 [^]                              { throw new UnknownCharacterException(yytext()); }
+//{Texto_Invalido}                 {System.out.println("ERROR CARACTER INVALIDO");throw new UnknownCharacterException(yytext()); }
