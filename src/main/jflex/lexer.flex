@@ -5,8 +5,8 @@ import lyc.compiler.ParserSym;
 import lyc.compiler.model.*;
 import static lyc.compiler.constants.Constants.*;
 import lyc.compiler.validations.Validate;
-//import lyc.compiler.simbolsTable.SimbolTable;
-//import lyc.compiler.simbolsTable.SimbolRow;
+import lyc.compiler.simbolsTable.SimbolTable;
+import lyc.compiler.simbolsTable.SimbolRow;
 
 %%
 
@@ -21,11 +21,11 @@ import lyc.compiler.validations.Validate;
 %eofval{
   return symbol(ParserSym.EOF);
 %eofval}
-/*
+
 %{ 
   SimbolTable simbolTable = SimbolTable.getSingletonInstance();
 %}
-*/
+
 %{
   private Symbol symbol(int type) {
     return new Symbol(type, yyline, yycolumn);
@@ -34,12 +34,12 @@ import lyc.compiler.validations.Validate;
   private Symbol symbol(int type, Object value) {        
     return new Symbol(type, yyline, yycolumn, value);
   }
-/*
+
   private void addSymbol(String id, Object value) {  
     SimbolRow simbolRow = new SimbolRow(id, value.toString(),"",0);
     simbolTable.setSimbol(simbolRow);
   }
-  */
+  
 %}
 
 
@@ -112,13 +112,13 @@ Div = "/"
 <YYINITIAL> {
   /* identifiers */
   {Identifier}                             { 
-                                              /*addSymbol("IDENTIFIER", yytext()); */
+                                              addSymbol("IDENTIFIER", yytext());
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
   /* Constants */
   {IntegerConstant}                        { 
                                              Validate.validateInt(yytext());
-                                            //addSymbol("INTEGER_CONSTANT", yytext()); 
+                                            addSymbol("INTEGER_CONSTANT", yytext()); 
                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
   {FloatConstant}                          { return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
