@@ -4,6 +4,7 @@ import java_cup.runtime.Symbol;
 import lyc.compiler.ParserSym;
 import lyc.compiler.model.*;
 import static lyc.compiler.constants.Constants.*;
+import lyc.compiler.validations.Validate;
 //import lyc.compiler.simbolsTable.SimbolTable;
 //import lyc.compiler.simbolsTable.SimbolRow;
 
@@ -111,13 +112,13 @@ Div = "/"
 <YYINITIAL> {
   /* identifiers */
   {Identifier}                             { 
-                                              /*Validator.validateSymbol(ParserSym.IDENTIFIER, yytext());*/
                                               /*addSymbol("IDENTIFIER", yytext()); */
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
   /* Constants */
   {IntegerConstant}                        { 
-                                             //addSymbol("INTEGER_CONSTANT", yytext()); 
+                                            Validate.validateInt(yytext());
+                                            //addSymbol("INTEGER_CONSTANT", yytext()); 
                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
   {FloatConstant}                          { return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }

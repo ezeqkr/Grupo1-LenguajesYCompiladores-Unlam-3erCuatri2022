@@ -1,6 +1,7 @@
 c=d*(e-21)/4 
 /*This is a comment*/
 /*esto es un comentario*/
+a = 40000
 a = 99999.99
 a = 99.
 a = .9999
