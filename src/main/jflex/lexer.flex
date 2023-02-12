@@ -117,7 +117,7 @@ Div = "/"
                                            }
   /* Constants */
   {IntegerConstant}                        { 
-                                            Validate.validateInt(yytext());
+                                             Validate.validateInt(yytext());
                                             //addSymbol("INTEGER_CONSTANT", yytext()); 
                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
