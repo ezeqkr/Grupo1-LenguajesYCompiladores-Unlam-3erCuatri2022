@@ -15,9 +15,6 @@ public class SimbolTable {
       if (simbolTable == null){
           simbolTable = new SimbolTable();
       }
-      else{
-          System.out.println("No se puede crear SibolTable porque ya existe un objeto de la clase SimbolTable");
-      }
       
       return simbolTable;
   }
