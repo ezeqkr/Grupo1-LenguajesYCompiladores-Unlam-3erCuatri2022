@@ -59,6 +59,7 @@ non terminal read;
 non terminal init;*/
 
 // Start Symbol Definition
+
 start with block;
 //code ::= block {: System.out.println("End"); :};
 block ::= sentence {: System.out.println("Block"); :};
@@ -72,8 +73,8 @@ term ::= term MULT factor {: System.out.println("*"); :};
 term ::= term DIV factor {: System.out.println("/"); :};
 term ::= factor {: System.out.println("Term = factor"); :};
 factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); :};
-factor ::= INTEGER_CONSTANT:constant {: System.out.println("Constant: " + constant ); :};
+factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " + intConstant ); :};
 factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); :};
-factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
+// factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 

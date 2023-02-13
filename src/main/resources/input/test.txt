@@ -1,4 +1,10 @@
-/*entero = 32767 */
+a = 1
+b = 4
+
+/* Comentario */
+
+/* entero = 32767 */
+
 flotante = 99999.99
 flotante = 99.
 flotante = .9999

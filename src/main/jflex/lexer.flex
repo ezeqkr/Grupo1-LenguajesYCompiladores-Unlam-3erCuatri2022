@@ -106,6 +106,7 @@ Div = "/"
 <YYINITIAL> {
   /* identifiers */
   {Identifier}                             {
+                                              Validate.validateIdentifier(yytext());
                                               addSymbol("IDENTIFIER", yytext());
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
