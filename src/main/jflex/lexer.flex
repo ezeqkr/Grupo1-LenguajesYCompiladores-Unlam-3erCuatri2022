@@ -83,16 +83,17 @@ LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 Identation =  [ \t\f]
 WhiteSpace = {LineTerminator} | {Identation}
-SpecialCar = [><:\+\-\*,\/@\%\.\[\];\(\)= ¿¡!]
+SpecialCar = [><:\+\-\*,\/@\%\.\[\];\(\)= ¿¡!\"]
 Character = {Letter} | {Digit}| {WhiteSpace} | {SpecialCar}
 Texto_Invalido = [^\{Character}\n]
 
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*|0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
-StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
+StringConstant = \"{InputCharacter}*\"
+//\"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
 // Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
-Comment = "/* " ({Character})* "*/"
+Comment = "/*" ({InputCharacter})* "*/"
 
 Plus = "+"
 Mult = "*"
@@ -162,7 +163,7 @@ Div = "/"
 
   /* whitespace */
   {WhiteSpace}                             { /* ignore */ }
-  {Comment}                                { /* ignore */ }
+  {Comment}                                { return symbol(ParserSym.COMMENT, yytext()); }
 
 }
 

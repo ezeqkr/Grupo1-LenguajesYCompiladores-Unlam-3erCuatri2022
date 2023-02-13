@@ -43,6 +43,7 @@ terminal INIT;
 terminal READ;
 terminal STRING_CONSTANT;
 terminal FLOAT_CONSTANT;
+terminal COMMENT;
 
 // Non Terminals
 //non terminal code;
@@ -65,6 +66,7 @@ start with block;
 block ::= sentence {: System.out.println("Block"); :};
 block ::= block sentence {: System.out.println("Blocks"); :};
 sentence ::= assignment {: System.out.println("Sentence"); :};
+sentence ::= COMMENT:comment {: System.out.println("Sentence: "+comment); :};
 assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
 expression ::= expression PLUS term {: System.out.println("+"); :};
 expression ::= expression SUB term {: System.out.println("-"); :};
@@ -75,6 +77,6 @@ term ::= factor {: System.out.println("Term = factor"); :};
 factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); :};
 factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " + intConstant ); :};
 factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); :};
-// factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
+factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 
