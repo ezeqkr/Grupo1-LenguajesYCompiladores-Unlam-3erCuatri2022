@@ -2,7 +2,8 @@ package lyc.compiler.validations;
 
 public class Validate {
 
-    final static int rangoString = 30;	
+    final static int rangoString = 40;	
+    final static int rangoIdentifier = 30;	
 
     public static void validateInt(String yytext) {
         int entero = Integer.parseInt(yytext);
@@ -25,7 +26,15 @@ public class Validate {
     public static void validateString(String yytext) {
         int cadena = yytext.length();
         if (cadena > rangoString - 2 ) {
-            System.out.println("\nERROR LEXICO : Longitud String Invalido ( 30 caracteres ):" + yytext + "\n");
+            System.out.println("\nERROR LEXICO : Longitud String Invalido ( 40 caracteres ):" + yytext + "\n");
+            System.exit(0);
+        }
+    }
+    
+    public static void validateIdentifier(String yytext) {
+        int cadena = yytext.length();
+        if (cadena > rangoIdentifier - 2 ) {
+            System.out.println("\nERROR LEXICO : Longitud de Identificador Invalido ( 30 caracteres ):" + yytext + "\n");
             System.exit(0);
         }
     }
