@@ -90,8 +90,7 @@ Texto_Invalido = [^\{Character}\n]
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*|0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
-StringConstant = \"{InputCharacter}*\"
-//\"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
+StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
 // Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 Comment = "/*" ({InputCharacter})* "*/"
 
