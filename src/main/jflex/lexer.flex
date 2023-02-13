@@ -41,10 +41,8 @@ import lyc.compiler.simbolsTable.SimbolRow;
   
 %}
 
-
 /* SECCION TOKENS */
 
-/* SECCION DE PALABRAS RESERVADAS */
 while = "while" | "WHILE"
 write = "write" | "WRITE"
 if = "if" | "IF"
@@ -89,13 +87,10 @@ SpecialCar = [><:\+\-\*,\/@\%\.\[\];\(\)= ¿¡!]
 Character = {Letter} | {Digit}| {WhiteSpace} | {SpecialCar}
 Texto_Invalido = [^\{Character}\n]
 
-
-
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*|0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
 StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
-
 Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 
 Plus = "+"
@@ -110,20 +105,22 @@ Div = "/"
 
 <YYINITIAL> {
   /* identifiers */
-  {Identifier}                             { 
+  {Identifier}                             {
                                               addSymbol("IDENTIFIER", yytext());
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
   /* Constants */
-  {IntegerConstant}                        { 
-                                             Validate.validateInt(yytext());
-                                            addSymbol("INTEGER_CONSTANT", yytext()); 
-                                             return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
+  {IntegerConstant}                        {
+                                              Validate.validateInt(yytext());
+                                              addSymbol("INTEGER_CONSTANT", yytext()); 
+                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
-  {FloatConstant}                          { return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
+  {FloatConstant}                          {  Validate.validateFloat(yytext());
+                                              return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
   
-  {StringConstant}                         { return symbol(ParserSym.STRING_CONSTANT, yytext()); }
-  /* keywords */
+  {StringConstant}                         {  Validate.validateString(yytext());
+                                              return symbol(ParserSym.STRING_CONSTANT, yytext()); }
+  /* SECCION DE PALABRAS RESERVADAS */
   {while}                                  { return symbol(ParserSym.WHILE); }
   {write}                                  { return symbol(ParserSym.WRITE); }
   {if}                                     { return symbol(ParserSym.IF); }
@@ -131,7 +128,8 @@ Div = "/"
   {Init}                                   { return symbol(ParserSym.INIT); }
   {Read}                                   { return symbol(ParserSym.READ); }
 
- /* operators */
+  /* Operadores */
+  {Percent}                                { return symbol(ParserSym.PERCENT); }
   {Plus}                                   { return symbol(ParserSym.PLUS); }
   {Sub}                                    { return symbol(ParserSym.SUB); }
   {Mult}                                   { return symbol(ParserSym.MULT); }
