@@ -1,9 +1,25 @@
+write("Chau Mundo")
+a = "Hola Mundo"
+write(a)
+b = 3
+
+/*
 a = 1
-b = 4
+b = 2
 
-/* Comentario */
+if (a > b)
+{
+    a = 1
+    /*write("a es mas grande que b") */
+}
+else
+{
+    a = 2
+    /*write("a es mas chico o igual a b") */
+}
+*/
 
-/* entero = 32767 */
+/* entero = 32767 
 
 flotante = 99999.99
 flotante = 99.
@@ -23,3 +39,5 @@ cad = "1234567890123456789012345678"
 /*esto es un comentario*/
 /*a = 40000*/
 /*c = 点 */
+
+*/
