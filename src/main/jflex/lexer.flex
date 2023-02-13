@@ -91,7 +91,8 @@ Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*|0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
 StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
-Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
+// Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
+Comment = "/* " ({Character})* "*/"
 
 Plus = "+"
 Mult = "*"
