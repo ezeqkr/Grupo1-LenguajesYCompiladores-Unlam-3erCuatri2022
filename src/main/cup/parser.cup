@@ -51,15 +51,15 @@ non terminal sentence;
 non terminal assignment;
 non terminal selection;
 non terminal iteration;
+non terminal escribir;
 non terminal expression;
 non terminal term;
 non terminal factor;
-non terminal if_;
 non terminal condition;
 non terminal comparation;
 non terminal comparator;
-/*non terminal while;
 non terminal write;
+/*non terminal while;
 non terminal read;
 non terminal init;*/
 
@@ -76,11 +76,9 @@ sentence ::= selection {: System.out.println("Sentence seleccion"); :};
 sentence ::= iteration {: System.out.println("Sentence iteracion"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
 
-//If hay que mejorar este if pero funciona
-sentence ::= if_ {: System.out.println("Sentence if"); :};
-if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
-if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if y else"); :};
-// condition ::= expression comparators expression{: System.out.println("Condicion"); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+
 condition ::= comparation {: System.out.println("Condition"); :};
 condition ::= condition AND comparation {: System.out.println("Condition AND"); :};
 condition ::= condition OR comparation {: System.out.println("Condition OR"); :};
@@ -97,7 +95,7 @@ comparator ::= GREATER_THAN_EQUAL {: System.out.println(">="); :};
 
 
 assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+
 
 //iteracion
 
