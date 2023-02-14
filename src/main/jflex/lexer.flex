@@ -44,7 +44,7 @@ import lyc.compiler.simbolsTable.SimbolRow;
 /* SECCION TOKENS */
 
 while = "while" | "WHILE"
-write = "write" | "WRITE"
+write = ("write" | "WRITE")
 if = "if" | "IF"
 else = "else" | "ELSE"
 Init = "init" | "INIT"
