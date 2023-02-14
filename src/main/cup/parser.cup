@@ -6,6 +6,12 @@ class Parser;
 
 
 // Terminals
+terminal WHILE;
+terminal WRITE;
+terminal IF;
+terminal ELSE;
+terminal INIT;
+terminal READ;
 terminal ASSIG;
 terminal PLUS;
 terminal SUB;
@@ -15,6 +21,8 @@ terminal OPEN_BRACKET;
 terminal CLOSE_BRACKET;
 terminal INTEGER_CONSTANT;
 terminal IDENTIFIER;
+terminal STRING_CONSTANT;
+terminal FLOAT_CONSTANT;
 terminal OPEN_CURLY_BRACKET;
 terminal CLOSE_CURLY_BRACKET;
 terminal OPEN_SQUARE_BRACKET;
@@ -35,14 +43,7 @@ terminal NOT;
 terminal QUOT;
 terminal SINGLE_QUOT;
 terminal PERCENT;
-terminal WHILE;
-terminal WRITE;
-terminal IF;
-terminal ELSE;
-terminal INIT;
-terminal READ;
-terminal STRING_CONSTANT;
-terminal FLOAT_CONSTANT;
+
 
 // Non Terminals
 //non terminal code;
@@ -52,9 +53,11 @@ non terminal assignment;
 non terminal expression;
 non terminal term;
 non terminal factor;
+non terminal if_;
+non terminal condition;
+non terminal comparators;
 /*non terminal while;
 non terminal write;
-non terminal if;
 non terminal read;
 non terminal init;*/
 
@@ -64,7 +67,14 @@ start with block;
 //code ::= block {: System.out.println("End"); :};
 block ::= sentence {: System.out.println("Block"); :};
 block ::= block sentence {: System.out.println("Blocks"); :};
-sentence ::= assignment {: System.out.println("Sentence"); :};
+sentence ::= assignment {: System.out.println("Sentence asig"); :};
+//If hay que mejorar este if pero funciona
+sentence ::= if_ {: System.out.println("Sentence if"); :};
+if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
+if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if y else"); :};
+condition ::= expression comparators expression{: System.out.println("Condicion"); :};
+comparators ::= EQUAL | NOT_EQUAL | LESS_THAN_EQUAL | GREATER_THAN_EQUAL | LESS_THAN | GREATER_THAN {: System.out.println("COMPARADOR"); :};
+
 assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
 expression ::= expression PLUS term {: System.out.println("+"); :};
 expression ::= expression SUB term {: System.out.println("-"); :};
