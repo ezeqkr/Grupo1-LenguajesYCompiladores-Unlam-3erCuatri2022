@@ -43,14 +43,6 @@ import lyc.compiler.simbolsTable.SimbolRow;
 
 /* SECCION TOKENS */
 
-while = "while" | "WHILE"
-write = ("write" | "WRITE")
-if = "if" | "IF"
-else = "else" | "ELSE"
-Init = "init" | "INIT"
-Read = "read" | "READ"
-
-
 Percent = "%"
 Assig = "="
 OpenBracket = "("
@@ -75,6 +67,12 @@ Not = "not" | "NOT"
 quot = "\""
 singlequot = "\'"
 
+while = "while" | "WHILE"
+write = "write" | "WRITE"
+if = "if" | "IF"
+else = "else" | "ELSE"
+Init = "init" | "INIT"
+Read = "read" | "READ"
 
 //Conjuntos
 Letter = [a-zA-Z]
@@ -106,6 +104,16 @@ Div = "/"
 /* keywords para probar branch*/
 
 <YYINITIAL> {
+
+  /* SECCION DE PALABRAS RESERVADAS */
+  {while}                                  { return symbol(ParserSym.WHILE); }
+  {write}                                  { return symbol(ParserSym.WRITE); }
+  {if}                                     { return symbol(ParserSym.IF); }
+  {else}                                   { return symbol(ParserSym.ELSE); }
+  {Init}                                   { return symbol(ParserSym.INIT); }
+  {Read}                                   { return symbol(ParserSym.READ); }
+
+
   /* identifiers */
   {Identifier}                             {
                                               Validate.validateIdentifier(yytext());
@@ -123,13 +131,7 @@ Div = "/"
   
   {StringConstant}                         {  Validate.validateString(yytext());
                                               return symbol(ParserSym.STRING_CONSTANT, yytext()); }
-  /* SECCION DE PALABRAS RESERVADAS */
-  {while}                                  { return symbol(ParserSym.WHILE); }
-  {write}                                  { return symbol(ParserSym.WRITE); }
-  {if}                                     { return symbol(ParserSym.IF); }
-  {else}                                   { return symbol(ParserSym.ELSE); }
-  {Init}                                   { return symbol(ParserSym.INIT); }
-  {Read}                                   { return symbol(ParserSym.READ); }
+
 
   /* Operadores */
   {Percent}                                { return symbol(ParserSym.PERCENT); }

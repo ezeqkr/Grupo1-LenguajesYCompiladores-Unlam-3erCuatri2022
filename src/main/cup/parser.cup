@@ -5,6 +5,12 @@ import java_cup.runtime.*;
 class Parser;
 
 // Terminals
+terminal WHILE;
+terminal WRITE;
+terminal IF;
+terminal ELSE;
+terminal INIT;
+terminal READ;
 terminal ASSIG;
 terminal PLUS;
 terminal SUB;
@@ -14,6 +20,8 @@ terminal OPEN_BRACKET;
 terminal CLOSE_BRACKET;
 terminal INTEGER_CONSTANT;
 terminal IDENTIFIER;
+terminal STRING_CONSTANT;
+terminal FLOAT_CONSTANT;
 terminal OPEN_CURLY_BRACKET;
 terminal CLOSE_CURLY_BRACKET;
 terminal OPEN_SQUARE_BRACKET;
@@ -34,14 +42,7 @@ terminal NOT;
 terminal QUOT;
 terminal SINGLE_QUOT;
 terminal PERCENT;
-terminal WHILE;
-terminal WRITE;
-terminal IF;
-terminal ELSE;
-terminal INIT;
-terminal READ;
-terminal STRING_CONSTANT;
-terminal FLOAT_CONSTANT;
+
 
 // Non Terminals
 //non terminal code;
@@ -50,15 +51,15 @@ non terminal sentence;
 non terminal assignment;
 non terminal selection;
 non terminal iteration;
-// non terminal condition;
-// non terminal comparation;
-// non terminal comparator;
 non terminal expression;
 non terminal term;
 non terminal factor;
-non terminal escribir;
+non terminal if_;
+non terminal condition;
+non terminal comparation;
+non terminal comparator;
 /*non terminal while;
-non terminal if;
+non terminal write;
 non terminal read;
 non terminal init;*/
 
@@ -75,27 +76,34 @@ sentence ::= selection {: System.out.println("Sentence seleccion"); :};
 sentence ::= iteration {: System.out.println("Sentence iteracion"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
 
-assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
+//If hay que mejorar este if pero funciona
+sentence ::= if_ {: System.out.println("Sentence if"); :};
+if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
+if_ ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if y else"); :};
+// condition ::= expression comparators expression{: System.out.println("Condicion"); :};
+condition ::= comparation {: System.out.println("Condition"); :};
+condition ::= condition AND comparation {: System.out.println("Condition AND"); :};
+condition ::= condition OR comparation {: System.out.println("Condition OR"); :};
 
-// selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+comparation ::= expression comparator expression {: System.out.println("Comparation <"); :};
+
+comparator ::= LESS_THAN {: System.out.println("<"); :};
+comparator ::= GREATER_THAN {: System.out.println(">"); :};
+comparator ::= EQUAL {: System.out.println("=="); :};
+comparator ::= NOT_EQUAL {: System.out.println("!="); :};
+comparator ::= LESS_THAN_EQUAL {: System.out.println("<="); :};
+comparator ::= GREATER_THAN_EQUAL {: System.out.println(">="); :};
+//comparator ::= EQUAL | NOT_EQUAL | LESS_THAN_EQUAL | GREATER_THAN_EQUAL | LESS_THAN | GREATER_THAN {: System.out.println("COMPARADOR"); :};
+
+
+assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
 
 //iteracion
 
 escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET {: System.out.println("Write"); :};
 escribir ::= WRITE OPEN_BRACKET IDENTIFIER CLOSE_BRACKET {: System.out.println("Write"); :};
 
-// condition ::= comparation {: System.out.println("Condition"); :};
-// condition ::= comparation AND comparation {: System.out.println("Condition AND"); :};
-// condition ::= comparation OR comparation {: System.out.println("Condition OR"); :};
-
-// comparation ::= expression comparator expression {: System.out.println("Comparation <"); :};
-
-// comparator ::= LESS_THAN {: System.out.println("<"); :};
-// comparator ::= GREATER_THAN {: System.out.println(">"); :};
-// comparator ::= EQUAL {: System.out.println("=="); :};
-// comparator ::= NOT_EQUAL {: System.out.println("!="); :};
-// comparator ::= LESS_THAN_EQUAL {: System.out.println("<="); :};
-// comparator ::= GREATER_THAN_EQUAL {: System.out.println(">="); :};
 
 expression ::= expression PLUS term {: System.out.println("+"); :};
 expression ::= expression SUB term {: System.out.println("-"); :};
@@ -108,5 +116,11 @@ term ::= factor {: System.out.println("Term = factor"); :};
 factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); :};
 factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " + intConstant ); :};
 factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); :};
-factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
+factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
+
+
+
+
+
+

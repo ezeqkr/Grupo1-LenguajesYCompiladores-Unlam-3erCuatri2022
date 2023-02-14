@@ -1,9 +1,16 @@
+if (4 > 3){a=4}
+else {
+    b=5
+}
+
+/*
 write("Chau Mundo")
 a = "Hola Mundo"
 write(a)
 b = 3
 
-/*
+c=d*(e-21)/4 
+
 a = 1
 b = 2
 
@@ -17,9 +24,18 @@ else
     a = 2
     /*write("a es mas chico o igual a b") */
 }
+
 */
 
 /* entero = 32767 
+
+
+
+a= (3)
+
+b = "@sdADaSjfla%dfg"
+b = "asldk  fh sjf"
+
 
 flotante = 99999.99
 flotante = 99.
