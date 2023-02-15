@@ -39,7 +39,7 @@ write("Adios mundo cruel")
 a = 1
 b = 1
 c = 2
-martin = 22
+
 if (a > b & c > b)
 {
     write("if 1")

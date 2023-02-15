@@ -112,7 +112,7 @@ iteration ::= WHILE OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET bloc
 escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT:str CLOSE_BRACKET{: System.out.println("Write " + str); :};
 escribir ::= WRITE OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{: System.out.println("Write " + id); :};
 
-leer ::= READ OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Read"); :};
+leer ::= READ OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{: System.out.println("Read " + id); :};
 
 
 initialization ::= INIT OPEN_CURLY_BRACKET declaration_block CLOSE_CURLY_BRACKET {: System.out.println("Initialization"); :};
