@@ -22,6 +22,7 @@ terminal OPEN_BRACKET;
 terminal CLOSE_BRACKET;
 terminal INTEGER_CONSTANT;
 terminal IDENTIFIER;
+terminal CHARACTER_CONSTANT;
 terminal STRING_CONSTANT;
 terminal FLOAT_CONSTANT;
 terminal OPEN_CURLY_BRACKET;
@@ -68,8 +69,11 @@ non terminal declaration_block;
 non terminal declaration_var;
 non terminal list_identifiers;
 non terminal type;
+non terminal object;
 non terminal listar;
+non terminal listado;
 non terminal muestrareversa;
+non terminal list_character;
 
 // Start Symbol Definition
 
@@ -84,7 +88,7 @@ sentence ::= iteration {: System.out.println("Sentence while"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
 sentence ::= leer {: System.out.println("Sentence read"); :};
 sentence ::= initialization {: System.out.println("Sentence inicializacion"); :};
-sentence ::= listar {: System.out.println("Sentence listar"); :};
+//sentence ::= listar {: System.out.println("Sentence listar"); :};
 sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
 
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo "); :};
@@ -105,7 +109,10 @@ comparator ::= NOT_EQUAL {: System.out.println("!="); :};
 comparator ::= LESS_THAN_EQUAL {: System.out.println("<="); :};
 comparator ::= GREATER_THAN_EQUAL {: System.out.println(">="); :};
 
-assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
+assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG object {: System.out.println("Assignment"); :};
+
+object ::= expression;
+object ::= listar;
 
 iteration ::= WHILE OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("While"); :};
 
@@ -141,5 +148,12 @@ factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: "
 factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 
-listar ::= LIST_INDEX_OF_LAST {: System.out.println("ListIndexOfLast"); :};
-muestrareversa ::= PRINT_REVERSE {: System.out.println("PrintReverseStringN"); :};
+listar ::= LIST_INDEX_OF_LAST OPEN_BRACKET OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET COMA OPEN_SQUARE_BRACKET listado CLOSE_SQUARE_BRACKET CLOSE_BRACKET{: System.out.println("ListIndexOfLast"); :};
+listado ::= IDENTIFIER:id {: System.out.println("Lista : "+ id); :};
+listado ::= INTEGER_CONSTANT:intConstant {: System.out.println("Lista : "+ intConstant); :};
+listado ::= listado COMA IDENTIFIER:id {: System.out.println("Lista : "+ id); :};
+listado ::= listado COMA INTEGER_CONSTANT:intConstant {: System.out.println("Lista : "+ intConstant); :};
+
+muestrareversa ::= PRINT_REVERSE OPEN_BRACKET OPEN_SQUARE_BRACKET list_character CLOSE_SQUARE_BRACKET COMA INTEGER_CONSTANT CLOSE_BRACKET{: System.out.println("PrintReverseStringN"); :};
+list_character ::= CHARACTER_CONSTANT:charConstant {: System.out.println("Lista : "+ charConstant); :};
+list_character ::= list_character COMA CHARACTER_CONSTANT:charConstant {: System.out.println("Lista : "+ charConstant); :};

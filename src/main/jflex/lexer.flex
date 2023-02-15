@@ -95,6 +95,7 @@ Texto_Invalido = [^\{Character}\n]
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*| 0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
+CharacterConstant = \'([^\"\\\\]|\\\\.)\'
 StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
 // Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
 // Comment = "/*" ({Character})* "*/"
@@ -171,6 +172,8 @@ Div = "/"
   {FloatConstant}                          {  Validate.validateFloat(yytext());
                                               addSymbol("FLOAT_CONSTANT", yytext());
                                               return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
+  
+  {CharacterConstant}                      {  return symbol(ParserSym.CHARACTER_CONSTANT, yytext()); }
   
   {StringConstant}                         {  Validate.validateString(yytext());
                                               addSymbol("STRING_CONSTANT", yytext());
