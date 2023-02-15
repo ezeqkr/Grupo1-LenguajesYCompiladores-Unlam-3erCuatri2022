@@ -11,6 +11,8 @@ terminal IF;
 terminal ELSE;
 terminal INIT;
 terminal READ;
+terminal LIST_INDEX_OF_LAST;
+terminal PRINT_REVERSE;
 terminal ASSIG;
 terminal PLUS;
 terminal SUB;
@@ -66,6 +68,8 @@ non terminal declaration_block;
 non terminal declaration_var;
 non terminal list_identifiers;
 non terminal type;
+non terminal listar;
+non terminal muestrareversa;
 
 // Start Symbol Definition
 
@@ -80,6 +84,8 @@ sentence ::= iteration {: System.out.println("Sentence while"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
 sentence ::= leer {: System.out.println("Sentence read"); :};
 sentence ::= initialization {: System.out.println("Sentence inicializacion"); :};
+sentence ::= listar {: System.out.println("Sentence listar"); :};
+sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
 
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
@@ -132,3 +138,6 @@ factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " +
 factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); :};
 factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
+
+listar ::= LIST_INDEX_OF_LAST {: System.out.println("ListIndexOfLast"); :};
+muestrareversa ::= PRINT_REVERSE {: System.out.println("PrintReverseStringN"); :};

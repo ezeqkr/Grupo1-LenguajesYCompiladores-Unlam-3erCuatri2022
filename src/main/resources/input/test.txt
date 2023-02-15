@@ -12,8 +12,7 @@ while( 1 > i1){
 
 read(i1)
 a = "mundo"
-write("hola")
-write(a)
+
 
 if (4 > 3){
     a=4
@@ -42,3 +41,9 @@ b = "asldk  fh sjf"
 flotante = 99999.99
 flotante = 99.
 flotante = .9999
+
+write("hola")
+write(a)
+
+PrintReverseStringN
+ListIndexOfLast
