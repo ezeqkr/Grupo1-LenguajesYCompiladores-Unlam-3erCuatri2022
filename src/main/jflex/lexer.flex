@@ -65,9 +65,9 @@ And = "&"
 Or = "|"
 quot = "\""
 singlequot = "\'"
-// int = "int"
-// float = "float"
-// string = "string"
+int = "Int"
+float = "Float"
+string = "String"
 write = "write"
 
 while = "while" | "WHILE"
@@ -91,7 +91,7 @@ Character = {Letter} | {Digit}| {WhiteSpace} | {SpecialCar}
 Texto_Invalido = [^\{Character}\n]
 
 Identifier = {Letter} ({Letter}|{Digit}|_)*
-IntegerConstant = {DigitSC}{Digit}*|0
+IntegerConstant = {DigitSC}{Digit}*| 0
 FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
 StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
 // Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"
@@ -116,9 +116,9 @@ Div = "/"
   {else}                                   { return symbol(ParserSym.ELSE); }
   {Init}                                   { return symbol(ParserSym.INIT); }
   {Read}                                   { return symbol(ParserSym.READ); }
-  // {int}                                    { return symbol(ParserSym.INT); }
-  // {float}                                  { return symbol(ParserSym.FLOAT); }
-  // {string}                                 { return symbol(ParserSym.STRING); }
+  {int}                                    { return symbol(ParserSym.INT); }
+  {float}                                  { return symbol(ParserSym.FLOAT); }
+  {string}                                 { return symbol(ParserSym.STRING); }
 
   /* identifiers */
   {Identifier}                             {

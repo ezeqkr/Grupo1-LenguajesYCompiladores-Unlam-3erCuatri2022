@@ -1,14 +1,23 @@
-while
+init {
+    f1, f2 : Float
+    i1, i2, i3 : Int
+    s1, s2, s3 : String
+}
 
-init
+i1 = 0
+while( 1 > i1){
+    i1 = 2
+}
 
-read(a)
 
+read(i1)
+a = "mundo"
 write("hola")
 write(a)
 
-if (4 > 3){a=4}
-else {
+if (4 > 3){
+    a=4
+}else{
     b=5
 }
 
@@ -16,6 +25,8 @@ else {
 c=d*(e-21)/4 
 a = 1
 b = 4
+
+
 
 /* Comentario */
 
@@ -31,4 +42,3 @@ b = "asldk  fh sjf"
 flotante = 99999.99
 flotante = 99.
 flotante = .9999
-
