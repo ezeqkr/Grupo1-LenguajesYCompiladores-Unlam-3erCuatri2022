@@ -62,3 +62,9 @@ if (not a > b)
 {
     write("if 3")
 }
+
+x = ListIndexOfLast ([x+2],[a,b,3,d])
+
+PrintReverseStringN (['d','l','r','o','w',' ','o','l','l','e','h'],2)
+
+PrintReverseStringN (['d','l','r','o','w','/','o','l','l','e','h'],2)
