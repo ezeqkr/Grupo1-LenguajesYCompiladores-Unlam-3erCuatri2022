@@ -1,8 +1,3 @@
-/*
-write("Chau Mundo")
-if (4 > 3 & 5 > 2){
-    a=4}
-
 while
 
 init
@@ -13,17 +8,10 @@ write("hola")
 write(a)
 
 if (4 > 3){a=4}
-
 else {
     b=5
 }
 
-m = 4
-
-
-a = "Hola Mundo"
-write(a)
-b = 3
 
 c=d*(e-21)/4 
 a = 1
@@ -43,4 +31,3 @@ b = "asldk  fh sjf"
 flotante = 99999.99
 flotante = 99.
 flotante = .9999
-

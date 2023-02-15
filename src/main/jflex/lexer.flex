@@ -65,9 +65,9 @@ And = "&"
 Or = "|"
 quot = "\""
 singlequot = "\'"
-int = "int"
-float = "float"
-string = "string"
+// int = "int"
+// float = "float"
+// string = "string"
 write = "write"
 
 while = "while" | "WHILE"
@@ -116,9 +116,9 @@ Div = "/"
   {else}                                   { return symbol(ParserSym.ELSE); }
   {Init}                                   { return symbol(ParserSym.INIT); }
   {Read}                                   { return symbol(ParserSym.READ); }
-  {int}                                    { return symbol(ParserSym.INT); }
-  {float}                                  { return symbol(ParserSym.FLOAT); }
-  {string}                                 { return symbol(ParserSym.STRING); }
+  // {int}                                    { return symbol(ParserSym.INT); }
+  // {float}                                  { return symbol(ParserSym.FLOAT); }
+  // {string}                                 { return symbol(ParserSym.STRING); }
 
   /* identifiers */
   {Identifier}                             {
