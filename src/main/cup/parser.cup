@@ -51,6 +51,7 @@ terminal PERCENT;
 //non terminal code;
 non terminal block;
 non terminal sentence;
+non terminal initialization;
 non terminal assignment;
 non terminal selection;
 non terminal iteration;
@@ -64,7 +65,6 @@ non terminal comparator;
 non terminal write;
 non terminal while;
 non terminal leer;
-non terminal initialization;
 non terminal declaration_block;
 non terminal declaration_var;
 non terminal list_identifiers;
@@ -90,8 +90,8 @@ declaration_block ::= declaration_block declaration_var {: System.out.println("D
 
 declaration_var ::= list_identifiers DOS_PUNTOS type {: System.out.println("Declaration con coma"); :};
 
-list_identifiers ::= IDENTIFIER:id {: System.out.println("Id: " + id); :};
-list_identifiers ::= list_identifiers COMA IDENTIFIER:id {: System.out.println("lista Ids: " + id); :};
+list_identifiers ::= IDENTIFIER {: System.out.println("Id: "); :};
+list_identifiers ::= list_identifiers COMA IDENTIFIER {: System.out.println("lista Ids: "); :};
 
 
 type ::= INT {: System.out.println("Integer"); :};

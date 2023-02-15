@@ -1,5 +1,5 @@
-write("Chau Mundo")
 /*
+write("Chau Mundo")
 if (4 > 3 & 5 > 2){
     a=4}
 else {
