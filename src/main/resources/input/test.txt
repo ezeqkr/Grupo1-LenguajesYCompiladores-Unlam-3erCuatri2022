@@ -1,34 +1,25 @@
-if (4 > 3 & 5 > 2){a=4}
+while
+
+init
+
+read(a)
+
+write("hola")
+write(a)
+
+if (4 > 3){a=4}
 else {
     b=5
-/*
 }
 
-write("Chau Mundo")
-a = "Hola Mundo"
-write(a)
-b = 3
 
 c=d*(e-21)/4 
-
 a = 1
-b = 2
+b = 4
 
-if (a > b)
-{
-    a = 1
-    /*write("a es mas grande que b") */
-}
-else
-{
-    a = 2
-    /*write("a es mas chico o igual a b") */
-}
+/* Comentario */
 
-*/
-
-/* entero = 32767 
-
+/* entero = 32767 */
 
 
 a= (3)
@@ -41,19 +32,3 @@ flotante = 99999.99
 flotante = 99.
 flotante = .9999
 
-cad = "1234567890123456789012345678" 
-
-/*c=d*(e-21)/4 */
-
-/* a = 99999.99 */
-/*a = 99. */
-/*a = .9999 */
-/*b = "@sdADaSjfla%dfg" */
-/*b = "asldk  fh sjf" */
-
-/*This is a comment*/
-/*esto es un comentario*/
-/*a = 40000*/
-/*c = 点 */
-
-*/
