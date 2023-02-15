@@ -50,17 +50,16 @@ non terminal block;
 non terminal sentence;
 non terminal assignment;
 non terminal selection;
-non terminal iteration;
+//non terminal iteration;
 non terminal escribir;
+non terminal leer;
 non terminal expression;
 non terminal term;
 non terminal factor;
 non terminal condition;
 non terminal comparation;
 non terminal comparator;
-non terminal write;
 /*non terminal while;
-non terminal read;
 non terminal init;*/
 
 
@@ -73,8 +72,9 @@ block ::= block sentence {: System.out.println("Blocks"); :};
 
 sentence ::= assignment {: System.out.println("Sentence asignacion"); :};
 sentence ::= selection {: System.out.println("Sentence seleccion"); :};
-sentence ::= iteration {: System.out.println("Sentence iteracion"); :};
+//sentence ::= iteration {: System.out.println("Sentence iteracion"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
+sentence ::= leer {: System.out.println("Sentence read"); :};
 
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
@@ -99,9 +99,10 @@ assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expres
 
 //iteracion
 
-escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET {: System.out.println("Write"); :};
-escribir ::= WRITE OPEN_BRACKET IDENTIFIER CLOSE_BRACKET {: System.out.println("Write"); :};
+escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET{: System.out.println("Write"); :};
+escribir ::= WRITE OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Write"); :};
 
+leer ::= READ OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Write"); :};
 
 expression ::= expression PLUS term {: System.out.println("+"); :};
 expression ::= expression SUB term {: System.out.println("-"); :};
