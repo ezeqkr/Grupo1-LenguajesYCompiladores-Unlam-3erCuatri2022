@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 /*
 write("Chau Mundo")
 if (4 > 3 & 5 > 2){
     a=4}
-=======
+
 while
 
 init
@@ -14,20 +13,17 @@ write("hola")
 write(a)
 
 if (4 > 3){a=4}
->>>>>>> af63341d94ce0fb856913452374122c1a3a1952e
+
 else {
     b=5
 }
 
-<<<<<<< HEAD
 m = 4
 
 
 a = "Hola Mundo"
 write(a)
 b = 3
-=======
->>>>>>> af63341d94ce0fb856913452374122c1a3a1952e
 
 c=d*(e-21)/4 
 a = 1
