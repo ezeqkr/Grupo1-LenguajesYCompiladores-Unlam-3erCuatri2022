@@ -77,6 +77,8 @@ while = "while" | "WHILE"
 else = "else" | "ELSE"
 Init = "init" | "INIT"
 Read = "read" | "READ"
+ListIndexOfLast = "ListIndexOfLast"
+PrintReverseStringN ="PrintReverseStringN"
 
 //Conjuntos
 Letter = [a-zA-Z]
@@ -119,6 +121,8 @@ Div = "/"
   {int}                                    { return symbol(ParserSym.INT); }
   {float}                                  { return symbol(ParserSym.FLOAT); }
   {string}                                 { return symbol(ParserSym.STRING); }
+  {ListIndexOfLast}                        { return symbol(ParserSym.LIST_INDEX_OF_LAST); }
+  {PrintReverseStringN}                    { return symbol(ParserSym.PRINT_REVERSE); }
 
   
   /* Operadores */
@@ -174,10 +178,10 @@ Div = "/"
   /* whitespace */
   {WhiteSpace}                             { /* ignore */ }
   {Comment}                                { /* ignore */ }
-
+  {Texto_Invalido}                         {System.out.println("ERROR CARACTER INVALIDO");throw new UnknownCharacterException(yytext()); }
 }
 
 
 /* error fallback */
 [^]                              { throw new UnknownCharacterException(yytext()); }
-//{Texto_Invalido}                 {System.out.println("ERROR CARACTER INVALIDO");throw new UnknownCharacterException(yytext()); }
+
