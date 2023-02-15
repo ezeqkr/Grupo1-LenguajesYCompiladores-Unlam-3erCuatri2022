@@ -81,14 +81,16 @@ sentence ::= escribir {: System.out.println("Sentence write"); :};
 sentence ::= leer {: System.out.println("Sentence read"); :};
 sentence ::= initialization {: System.out.println("Sentence inicializacion"); :};
 
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo "); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If "); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
 
-condition ::= comparation {: System.out.println("Condition"); :};
-condition ::= condition AND comparation {: System.out.println("Condition AND"); :};
-condition ::= condition OR comparation {: System.out.println("Condition OR"); :};
+condition ::= comparation {: System.out.println("Condition "); :};
+condition ::= condition AND comparation {: System.out.println("Condition AND "); :};
+condition ::= condition OR comparation {: System.out.println("Condition OR "); :};
+condition ::= NOT comparation {: System.out.println("Condition NOT "); :};
 
-comparation ::= expression comparator expression {: System.out.println("Comparation <"); :};
+
+comparation ::= expression comparator expression {: System.out.println("Comparation"); :};
 
 comparator ::= LESS_THAN {: System.out.println("<"); :};
 comparator ::= GREATER_THAN {: System.out.println(">"); :};
@@ -101,10 +103,10 @@ assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expres
 
 iteration ::= WHILE OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("While"); :};
 
-escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET{: System.out.println("Write"); :};
-escribir ::= WRITE OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Write"); :};
+escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT:str CLOSE_BRACKET{: System.out.println("Write " + str); :};
+escribir ::= WRITE OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{: System.out.println("Write " + id); :};
 
-leer ::= READ OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Write"); :};
+leer ::= READ OPEN_BRACKET IDENTIFIER CLOSE_BRACKET{: System.out.println("Read"); :};
 
 
 initialization ::= INIT OPEN_CURLY_BRACKET declaration_block CLOSE_CURLY_BRACKET {: System.out.println("Initialization"); :};

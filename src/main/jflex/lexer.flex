@@ -55,28 +55,28 @@ Dot = "."
 DosPuntos = ":"
 Coma = ","
 SemiColon = ";"
+And = "&"
+Or = "||"
+Not = "not" | "NOT"
 LessThan = "<"
 GreaterThan = ">"
 Equal = "=="
 NotEqual = "!="
 LessThanEqual = "<="
 GreaterThanEqual = ">="
-And = "&"
-Or = "|"
 quot = "\""
 singlequot = "\'"
 int = "Int"
 float = "Float"
 string = "String"
 write = "write"
-
+if = "if"
 while = "while" | "WHILE"
 // write = "write" | "WRITE"
-if = "if" | "IF"
+//if = "if" | "IF"
 else = "else" | "ELSE"
 Init = "init" | "INIT"
 Read = "read" | "READ"
-Not = "not" | "NOT"
 
 //Conjuntos
 Letter = [a-zA-Z]
@@ -120,25 +120,7 @@ Div = "/"
   {float}                                  { return symbol(ParserSym.FLOAT); }
   {string}                                 { return symbol(ParserSym.STRING); }
 
-  /* identifiers */
-  {Identifier}                             {
-                                              Validate.validateIdentifier(yytext());
-                                              addSymbol("IDENTIFIER", yytext());
-                                              return symbol(ParserSym.IDENTIFIER, yytext());
-                                           }
-  /* Constants */
-  {IntegerConstant}                        {
-                                              Validate.validateInt(yytext());
-                                              addSymbol("INTEGER_CONSTANT", yytext()); 
-                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
-                                           }
-  {FloatConstant}                          {  Validate.validateFloat(yytext());
-                                              return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
   
-  {StringConstant}                         {  Validate.validateString(yytext());
-                                              return symbol(ParserSym.STRING_CONSTANT, yytext()); }
-
-
   /* Operadores */
   {Percent}                                { return symbol(ParserSym.PERCENT); }
   {Plus}                                   { return symbol(ParserSym.PLUS); }
@@ -156,18 +138,37 @@ Div = "/"
   {DosPuntos}                              { return symbol(ParserSym.DOS_PUNTOS); }
   {Coma}                                   { return symbol(ParserSym.COMA); }
   {SemiColon}                              { return symbol(ParserSym.SEMI_COLON); }
+  {And}                                    { return symbol(ParserSym.AND); }
+  {Or}                                     { return symbol(ParserSym.OR); }
+  {Not}                                    { return symbol(ParserSym.NOT); }
   {LessThan}                               { return symbol(ParserSym.LESS_THAN); }
   {GreaterThan}                            { return symbol(ParserSym.GREATER_THAN); }
   {Equal}                                  { return symbol(ParserSym.EQUAL); }
   {NotEqual}                               { return symbol(ParserSym.NOT_EQUAL); }
   {LessThanEqual}                          { return symbol(ParserSym.LESS_THAN_EQUAL); }
   {GreaterThanEqual}                       { return symbol(ParserSym.GREATER_THAN_EQUAL); }
-  {And}                                    { return symbol(ParserSym.AND); }
-  {Or}                                     { return symbol(ParserSym.OR); }
-  {Not}                                    { return symbol(ParserSym.NOT); }
   {quot}                                   { return symbol(ParserSym.QUOT); }
   {singlequot}                             { return symbol(ParserSym.SINGLE_QUOT); }
   {Percent}                                { return symbol(ParserSym.PERCENT); }
+
+/* identifiers */
+  {Identifier}                             {
+                                              Validate.validateIdentifier(yytext());
+                                              addSymbol("IDENTIFIER", yytext());
+                                              return symbol(ParserSym.IDENTIFIER, yytext());
+                                           }
+  /* Constants */
+  {IntegerConstant}                        {
+                                              Validate.validateInt(yytext());
+                                              addSymbol("INTEGER_CONSTANT", yytext()); 
+                                              return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
+                                           }
+  {FloatConstant}                          {  Validate.validateFloat(yytext());
+                                              return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
+  
+  {StringConstant}                         {  Validate.validateString(yytext());
+                                              return symbol(ParserSym.STRING_CONSTANT, yytext()); }
+
 
 
   /* whitespace */
