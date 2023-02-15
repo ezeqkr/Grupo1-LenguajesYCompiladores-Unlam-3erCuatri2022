@@ -169,9 +169,11 @@ Div = "/"
                                               return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
   {FloatConstant}                          {  Validate.validateFloat(yytext());
+                                              addSymbol("FLOAT_CONSTANT", yytext());
                                               return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
   
   {StringConstant}                         {  Validate.validateString(yytext());
+                                              addSymbol("STRING_CONSTANT", yytext());
                                               return symbol(ParserSym.STRING_CONSTANT, yytext()); }
 
 
