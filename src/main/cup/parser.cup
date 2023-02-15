@@ -11,6 +11,9 @@ terminal IF;
 terminal ELSE;
 terminal INIT;
 terminal READ;
+terminal INT;
+terminal FLOAT;
+terminal STRING;
 terminal ASSIG;
 terminal PLUS;
 terminal SUB;
@@ -59,10 +62,13 @@ non terminal condition;
 non terminal comparation;
 non terminal comparator;
 non terminal write;
-/*non terminal while;
-non terminal read;
-non terminal init;*/
-
+non terminal while;
+non terminal leer;
+non terminal initialization;
+non terminal declaration_block;
+non terminal declaration_var;
+non terminal list_identifiers;
+non terminal type;
 
 // Start Symbol Definition
 
@@ -71,10 +77,29 @@ start with block;
 block ::= sentence {: System.out.println("Block"); :};
 block ::= block sentence {: System.out.println("Blocks"); :};
 
+sentence ::= initialization {: System.out.println("Sentence inicializacion"); :};
 sentence ::= assignment {: System.out.println("Sentence asignacion"); :};
 sentence ::= selection {: System.out.println("Sentence seleccion"); :};
 sentence ::= iteration {: System.out.println("Sentence iteracion"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
+sentence ::= leer {: System.out.println("Sentence read"); :};
+
+initialization ::= INIT OPEN_CURLY_BRACKET declaration_block CLOSE_CURLY_BRACKET {: System.out.println("Init"); :};
+declaration_block ::= declaration_var {: System.out.println("Declaration con tipo"); :}
+declaration_block ::= declaration_block declaration_var {: System.out.println("Declaration"); :}
+
+declaration_var ::= list_identifiers DOS_PUNTOS type {: System.out.println("Declaration con coma"); :};
+
+list_identifiers ::= IDENTIFIER:id {: System.out.println("Id: " + id); :};
+list_identifiers ::= list_identifiers COMA IDENTIFIER:id {: System.out.println("lista Ids: " + id); :};
+
+
+type ::= INT {: System.out.println("Integer"); :};
+type ::= FLOAT {: System.out.println("Float"); :};
+type ::= STRING {: System.out.println("String"); :};
+
+
+assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
 
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo"); :};
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If"); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
@@ -91,16 +116,14 @@ comparator ::= EQUAL {: System.out.println("=="); :};
 comparator ::= NOT_EQUAL {: System.out.println("!="); :};
 comparator ::= LESS_THAN_EQUAL {: System.out.println("<="); :};
 comparator ::= GREATER_THAN_EQUAL {: System.out.println(">="); :};
-//comparator ::= EQUAL | NOT_EQUAL | LESS_THAN_EQUAL | GREATER_THAN_EQUAL | LESS_THAN | GREATER_THAN {: System.out.println("COMPARADOR"); :};
 
-
-assignment ::= IDENTIFIER:id {: System.out.println("Id: " + id); :} ASSIG expression {: System.out.println("Assignment"); :};
-
-
-//iteracion
+iteration ::= WHILE OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("While"); :};
 
 escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET {: System.out.println("Write"); :};
 escribir ::= WRITE OPEN_BRACKET IDENTIFIER CLOSE_BRACKET {: System.out.println("Write"); :};
+
+leer ::= READ OPEN_BRACKET IDENTIFIER CLOSE_BRACKET {: System.out.println("Read id"); :};
+leer ::= READ OPEN_BRACKET STRING_CONSTANT CLOSE_BRACKET {: System.out.println("Read cte"); :};
 
 
 expression ::= expression PLUS term {: System.out.println("+"); :};

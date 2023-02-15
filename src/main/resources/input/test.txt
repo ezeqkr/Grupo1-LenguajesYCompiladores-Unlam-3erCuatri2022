@@ -1,10 +1,14 @@
-if (4 > 3 & 5 > 2){a=4}
+write("Chau Mundo")
+/*
+if (4 > 3 & 5 > 2){
+    a=4}
 else {
     b=5
-/*
 }
 
-write("Chau Mundo")
+m = 4
+
+
 a = "Hola Mundo"
 write(a)
 b = 3

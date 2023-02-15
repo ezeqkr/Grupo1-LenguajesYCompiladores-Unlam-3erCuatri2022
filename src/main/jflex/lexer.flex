@@ -63,16 +63,20 @@ LessThanEqual = "<="
 GreaterThanEqual = ">="
 And = "&"
 Or = "|"
-Not = "not" | "NOT"
 quot = "\""
 singlequot = "\'"
+int = "int"
+float = "float"
+string = "string"
+write = "write"
 
 while = "while" | "WHILE"
-write = "write" | "WRITE"
+// write = "write" | "WRITE"
 if = "if" | "IF"
 else = "else" | "ELSE"
 Init = "init" | "INIT"
 Read = "read" | "READ"
+Not = "not" | "NOT"
 
 //Conjuntos
 Letter = [a-zA-Z]
@@ -112,7 +116,9 @@ Div = "/"
   {else}                                   { return symbol(ParserSym.ELSE); }
   {Init}                                   { return symbol(ParserSym.INIT); }
   {Read}                                   { return symbol(ParserSym.READ); }
-
+  {int}                                    { return symbol(ParserSym.INT); }
+  {float}                                  { return symbol(ParserSym.FLOAT); }
+  {string}                                 { return symbol(ParserSym.STRING); }
 
   /* identifiers */
   {Identifier}                             {
@@ -162,6 +168,7 @@ Div = "/"
   {quot}                                   { return symbol(ParserSym.QUOT); }
   {singlequot}                             { return symbol(ParserSym.SINGLE_QUOT); }
   {Percent}                                { return symbol(ParserSym.PERCENT); }
+
 
   /* whitespace */
   {WhiteSpace}                             { /* ignore */ }
