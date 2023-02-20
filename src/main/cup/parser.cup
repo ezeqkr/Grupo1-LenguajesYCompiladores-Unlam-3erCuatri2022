@@ -10,14 +10,17 @@ class Parser;
 action code
 {:
     public List polacaInversa = new ArrayList<>();
+    
 /* Algo así habría que poner en el main
-    FileWriter writer = new FileWriter("datos.txt");
-
+try {
+    FileWriter writer = new FileWriter("intermediate-code.txt");
     for (int i = 0; i < polacaInversa.length; i++) {
-        writer.write(polacaInversa[i] + ",");
-    };
-
+        writer.write(polacaInversa[i] + "\n");
+    }
     writer.close();
+} catch (IOException e) {
+    e.printStackTrace();
+}
 */
 :}
 
