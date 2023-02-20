@@ -1,8 +1,17 @@
 package lyc.compiler;
 
 import java_cup.runtime.*;
+import java.io.*;
+import java.util.*;
 
 class Parser;
+
+
+action code
+{:
+    public List polacaInversa = new ArrayList<>();
+:}
+
 
 // Terminals
 terminal WHILE;
@@ -79,8 +88,8 @@ non terminal list_character;
 
 start with block;
 //code ::= block {: System.out.println("End"); :};
-block ::= sentence {: System.out.println("Block"); :};
-block ::= block sentence {: System.out.println("Blocks"); :};
+block ::= sentence {: System.out.println("Block"); System.out.println(polacaInversa); :};
+block ::= block sentence {: System.out.println("Blocks"); System.out.println(polacaInversa); :};
 
 sentence ::= assignment {: System.out.println("Sentence asignacion"); :};
 sentence ::= selection {: System.out.println("Sentence seleccion"); :};
@@ -142,10 +151,10 @@ term ::= term MULT factor {: System.out.println("*"); :};
 term ::= term DIV factor {: System.out.println("/"); :};
 term ::= factor {: System.out.println("Term = factor"); :};
 
-factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); :};
-factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " + intConstant ); :};
-factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); :};
-factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); :};
+factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(id); :};
+factor ::= INTEGER_CONSTANT:intConstant {: System.out.println("Int Constant: " + intConstant ); polacaInversa.add(intConstant); :};
+factor ::= FLOAT_CONSTANT:floatConstant {: System.out.println("Float Constant: " + floatConstant ); polacaInversa.add(floatConstant); :};
+factor ::= STRING_CONSTANT:stringConstant {: System.out.println("String Constant: " + stringConstant ); polacaInversa.add(stringConstant); :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 
 listar ::= LIST_INDEX_OF_LAST OPEN_BRACKET OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET COMA OPEN_SQUARE_BRACKET listado CLOSE_SQUARE_BRACKET CLOSE_BRACKET{: System.out.println("ListIndexOfLast"); :};
