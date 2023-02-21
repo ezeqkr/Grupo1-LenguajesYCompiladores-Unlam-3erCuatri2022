@@ -60,7 +60,7 @@ terminal FLOAT;
 terminal STRING;
 
 // Non Terminals
-//non terminal code;
+non terminal programa;
 non terminal block;
 non terminal sentence;
 non terminal assignment;
@@ -87,8 +87,8 @@ non terminal list_character;
 
 // Start Symbol Definition
 
-start with block;
-//code ::= block {: System.out.println("End"); :};
+start with programa;
+programa ::= initialization block {: System.out.println("End"); :};
 block ::= sentence {: System.out.println("Block"); System.out.println(polacaInversa); :};
 block ::= block sentence {: System.out.println("Blocks"); System.out.println(polacaInversa); :};
 
@@ -97,7 +97,7 @@ sentence ::= selection {: System.out.println("Sentence seleccion"); :};
 sentence ::= iteration {: System.out.println("Sentence while"); :};
 sentence ::= escribir {: System.out.println("Sentence write"); :};
 sentence ::= leer {: System.out.println("Sentence read"); :};
-sentence ::= initialization {: System.out.println("Sentence inicializacion"); :};
+
 //sentence ::= listar {: System.out.println("Sentence listar"); :};
 sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
 
