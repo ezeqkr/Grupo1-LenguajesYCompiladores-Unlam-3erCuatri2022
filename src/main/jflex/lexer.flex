@@ -94,7 +94,7 @@ Texto_Invalido = [^\{Character}\n]
 
 Identifier = {Letter} ({Letter}|{Digit}|_)*
 IntegerConstant = {DigitSC}{Digit}*| 0
-FloatConstant = {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
+FloatConstant = -? {Digit}+{Dot}{Digit}* | {Dot}{Digit}+ ///////////////////////// faltaría ver como agregar "-"?
 CharacterConstant = \'([^\"\\\\]|\\\\.)\'
 StringConstant = \"([^\"\\\\]|\\\\.)*\" // \"{Character}*\"
 // Comment = "/*" ({Letter}|{Digit}|{WhiteSpace})* "*/"

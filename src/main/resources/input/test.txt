@@ -28,6 +28,7 @@ if (a<b){} else {a=10}
 a = 99999.99
 a = 99.
 a = .9999
+a = -1.1
 
 b = "@sdADaSjfla%dfg"
 b = "asldk  fh sjf"
