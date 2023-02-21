@@ -20,6 +20,7 @@ else
 {
     write("a es mas chico o igual a b")
 }
+if ( a < b ) { } else { a = 10 }
 
 a = 99999.99
 a = 99.

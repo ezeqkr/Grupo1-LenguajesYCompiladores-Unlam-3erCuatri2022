@@ -113,7 +113,10 @@ sentence ::= initialization {: System.out.println("Sentence inicializacion"); :}
 sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
 
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo "); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET CLOSE_CURLY_BRACKET {: System.out.println("If "); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
 selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If "); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+
+
 
 condition ::= comparation {: System.out.println("Condition "); :};
 condition ::= condition AND comparation {: System.out.println("Condition AND "); :};
