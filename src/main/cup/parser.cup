@@ -133,27 +133,27 @@ comparation ::= expression comparator expression {:
 :};
 
 comparator ::= LESS_THAN {:
-    insertarCond("BGE")
+    insertarCond("BGE");
     System.out.println("<"); 
 :};
 comparator ::= GREATER_THAN {:
-    insertarCond("BLE")
+    insertarCond("BLE");
     System.out.println(">");
 :};
 comparator ::= EQUAL {:
-    insertarCond("BNE")
+    insertarCond("BNE");
     System.out.println("=="); 
 :};
 comparator ::= NOT_EQUAL {:
-    insertarCond("BEQ")
+    insertarCond("BEQ");
     System.out.println("!="); 
 :};
 comparator ::= LESS_THAN_EQUAL {:
-    insertarCond("BGT")
+    insertarCond("BGT");
     System.out.println("<="); 
 :};
 comparator ::= GREATER_THAN_EQUAL {:
-    insertarCond("BLT")
+    insertarCond("BLT");
     System.out.println(">=");
 :};
 
@@ -167,7 +167,7 @@ assignment ::= IDENTIFIER:id ASSIG object {:
 object ::= expression;
 object ::= listar;
 
-iteration ::= WHILE {: polacaInversa.add("ET"); pila.add(polacaInversa.size()); } 
+iteration ::= WHILE {: polacaInversa.add("ET"); pila.add(polacaInversa.size());:}
 OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {:
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
@@ -175,15 +175,16 @@ OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKE
     System.out.println("While"); 
 :};
 
+
 escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT:str CLOSE_BRACKET{:
     final String strCte = str.toString().replace("\"", "");
-    polacaInversa.insertar(strCte);
-    polacaInversa.insertar("WRITE");
+    polacaInversa.add(strCte);
+    polacaInversa.add("WRITE");
     System.out.println("Write " + str);
 :};
 escribir ::= WRITE OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{:
     polacaInversa.add(id.toString());  // agrego el id a la lista
-    polacaInversa.insertar("WRITE");
+    polacaInversa.add("WRITE");
     System.out.println("Write " + id); 
 :};
 
