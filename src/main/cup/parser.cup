@@ -13,7 +13,7 @@ action code
     
     public void insertarCond(String elem){
         polacaInversa.add("CMP");
-        polacaInversa.add(elemento);
+        polacaInversa.add(elem);
         polacaInversa.add("#");
         pila.add(polacaInversa.size());
     }
