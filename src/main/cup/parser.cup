@@ -167,7 +167,7 @@ assignment ::= IDENTIFIER:id ASSIG object {:
 object ::= expression;
 object ::= listar;
 
-iteration ::= WHILE {: polacaInversa.add("ET"); pila.add(polacaInversa.size());:}
+iteration ::= WHILE {: polacaInversa.add("ET"); pila.add(polacaInversa.size()) ;:}
 OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {:
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
@@ -253,8 +253,8 @@ factor ::= FLOAT_CONSTANT:floatConstant {:
     System.out.println("Float Constant: " + floatConstant );
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
-    final String str = stringConstant.toString().replace("\"", ""); 
-    polacaInversa.add(stringConstant); 
+    final String str = stringConstant.toString().replace("\"", "");// elimiino las comillas del literal..
+    polacaInversa.add(str);
     System.out.println("String Constant: " + stringConstant );
 :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
