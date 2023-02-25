@@ -352,12 +352,16 @@ factor ::= STRING_CONSTANT:stringConstant {:
 :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
 
-listar ::= LIST_INDEX_OF_LAST OPEN_BRACKET OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET COMA OPEN_SQUARE_BRACKET listado CLOSE_SQUARE_BRACKET CLOSE_BRACKET{: System.out.println("ListIndexOfLast"); :};
-listado ::= IDENTIFIER:id {: System.out.println("Lista : "+ id); :};
-listado ::= INTEGER_CONSTANT:intConstant {: System.out.println("Lista : "+ intConstant); :};
-listado ::= listado COMA IDENTIFIER:id {: System.out.println("Lista : "+ id); :};
-listado ::= listado COMA INTEGER_CONSTANT:intConstant {: System.out.println("Lista : "+ intConstant); :};
+listar  ::= LIST_INDEX_OF_LAST {: polacaInversa.add("@retorno"); polacaInversa.add("0"); polacaInversa.add("="); polacaInversa.add("@indice"); polacaInversa.add("1"); polacaInversa.add("="); :}
+            OPEN_BRACKET OPEN_SQUARE_BRACKET {: polacaInversa.add("@E"); :}
+            expression   {: polacaInversa.add("="); :}
+            CLOSE_SQUARE_BRACKET COMA OPEN_SQUARE_BRACKET listado CLOSE_SQUARE_BRACKET CLOSE_BRACKET{: polacaInversa.add("@retorno"); System.out.println("ListIndexOfLast"); :};
+listado ::= IDENTIFIER:id {: polacaInversa.add("@E"); polacaInversa.add(id.toString()); insertarCond("BNE"); pila.add(polacaInversa.size()); polacaInversa.add("@retorno"); polacaInversa.add("@indice"); polacaInversa.add("="); polacaInversa.set( pila.pop()-1,"#"+(polacaInversa.size()+1) ); polacaInversa.add("@indice"); polacaInversa.add("@indice"); polacaInversa.add("+"); polacaInversa.add("1"); polacaInversa.add("="); System.out.println("Lista : "+ id); :};
+listado ::= INTEGER_CONSTANT:intConstant {: polacaInversa.add("@E"); polacaInversa.add(intConstant.toString()); insertarCond("BNE"); pila.add(polacaInversa.size()); polacaInversa.add("@retorno"); polacaInversa.add("@indice"); polacaInversa.add("="); polacaInversa.set( pila.pop()-1,"#"+(polacaInversa.size()+1) ); polacaInversa.add("@indice"); polacaInversa.add("@indice"); polacaInversa.add("+"); polacaInversa.add("1"); polacaInversa.add("="); System.out.println("Lista : "+ intConstant); :};
+listado ::= listado COMA IDENTIFIER:id {: polacaInversa.add("@E"); polacaInversa.add(id.toString()); insertarCond("BNE"); pila.add(polacaInversa.size()); polacaInversa.add("@retorno"); polacaInversa.add("@indice"); polacaInversa.add("="); polacaInversa.set( pila.pop()-1,"#"+(polacaInversa.size()+1) ); polacaInversa.add("@indice"); polacaInversa.add("@indice"); polacaInversa.add("+"); polacaInversa.add("1"); polacaInversa.add("=");  System.out.println("Lista : "+ id); :};
+listado ::= listado COMA INTEGER_CONSTANT:intConstant {: polacaInversa.add("@E"); polacaInversa.add(intConstant.toString()); insertarCond("BNE"); pila.add(polacaInversa.size()); polacaInversa.add("@retorno"); polacaInversa.add("@indice"); polacaInversa.add("="); polacaInversa.set( pila.pop()-1,"#"+(polacaInversa.size()+1) ); polacaInversa.add("@indice"); polacaInversa.add("@indice"); polacaInversa.add("+"); polacaInversa.add("1"); polacaInversa.add("="); System.out.println("Lista : "+ intConstant); :};
 
-muestrareversa ::= PRINT_REVERSE OPEN_BRACKET OPEN_SQUARE_BRACKET list_character CLOSE_SQUARE_BRACKET COMA INTEGER_CONSTANT CLOSE_BRACKET{: System.out.println("PrintReverseStringN"); :};
-list_character ::= CHARACTER_CONSTANT:charConstant {: System.out.println("Lista : "+ charConstant); :};
-list_character ::= list_character COMA CHARACTER_CONSTANT:charConstant {: System.out.println("Lista : "+ charConstant); :};
+
+muestrareversa ::= PRINT_REVERSE OPEN_BRACKET OPEN_SQUARE_BRACKET list_character CLOSE_SQUARE_BRACKET COMA INTEGER_CONSTANT:intConstant CLOSE_BRACKET{: polacaInversa.add("ET"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add(intConstant.toString()); insertarCond("BE"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add("@cant"); polacaInversa.add("1"); polacaInversa.add("-"); polacaInversa.add("="); polacaInversa.add("BI"); polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+2)); polacaInversa.add("#"+(pila.pop())); System.out.println("PrintReverseStringN"); :};
+list_character ::= CHARACTER_CONSTANT:charConstant {: polacaInversa.add("@aux"); polacaInversa.add(charConstant.toString().replace("\'","")); System.out.println("Lista : "+ charConstant); :};
+list_character ::= list_character COMA CHARACTER_CONSTANT:charConstant {: polacaInversa.add("@aux"); polacaInversa.add("@aux"); polacaInversa.add(charConstant.toString().replace("\'","")); polacaInversa.add("+"); polacaInversa.add("="); System.out.println("Lista : "+ charConstant); :};
