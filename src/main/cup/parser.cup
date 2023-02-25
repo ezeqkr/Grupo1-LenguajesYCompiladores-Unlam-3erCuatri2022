@@ -8,7 +8,7 @@ class Parser;
 
 action code
 {:
-    public List polacaInversa = new ArrayList<>();
+    public ArrayList<String> polacaInversa = new ArrayList<>();
     public Stack<Integer> pila = new Stack<>();    
     
     public void insertarCond(String elem){
@@ -17,6 +17,23 @@ action code
         polacaInversa.add("#");
         pila.add(polacaInversa.size());
     }
+
+    public void mostrar(){
+            System.out.println("---MOSTRANDO POLACA INVERSA------");
+            int i = 1;
+
+            for(String celda : polacaInversa){
+                System.out.println(i + ". " + celda);
+                i++;
+            }
+            i=1;
+            for(String celda : polacaInversa){
+                System.out.print("|" + celda + "|");
+                i++;
+            }
+        }
+
+
 :}
 
 
@@ -95,14 +112,17 @@ non terminal list_character;
 // Start Symbol Definition
 
 start with programa;
-programa ::= initialization block {: System.out.println("End"); :};
+programa ::= initialization block {:
+    mostrar();
+    System.out.println("End");
+:};
 block ::= sentence {:
-    System.out.println(polacaInversa); 
+    //System.out.println(polacaInversa);
     System.out.println("Block");
 :};
 
 block ::= block sentence {: 
-    System.out.println(polacaInversa);
+    //System.out.println(polacaInversa);
     System.out.println("Blocks");
 :};
 
@@ -158,7 +178,7 @@ comparator ::= GREATER_THAN_EQUAL {:
 :};
 
 assignment ::= IDENTIFIER:id ASSIG object {:
-    polacaInversa.add(id);  // agrego el id a la lista
+    polacaInversa.add(id.toString());  // agrego el id a la lista
     polacaInversa.add(":="); // agrego el operador de asignacion
     System.out.println("Id: " + id);
     System.out.println("Assignment"); 
@@ -242,14 +262,14 @@ term ::= factor {:
 
 
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
-factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(id); :};
+factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(id.toString()); :};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
     System.out.println("Int Constant: " + intConstant );
-    polacaInversa.add(intConstant); 
+    polacaInversa.add(intConstant.toString());
 :};
 factor ::= FLOAT_CONSTANT:floatConstant {:
-    polacaInversa.add(floatConstant); 
+    polacaInversa.add(floatConstant.toString());
     System.out.println("Float Constant: " + floatConstant );
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
