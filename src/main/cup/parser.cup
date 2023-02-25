@@ -84,6 +84,7 @@ terminal FLOAT;
 terminal STRING;
 
 // Non Terminals
+non terminal pvi;
 non terminal programa;
 non terminal block;
 non terminal sentence;
@@ -135,45 +136,82 @@ sentence ::= leer {: System.out.println("Sentence read"); :};
 //sentence ::= listar {: System.out.println("Sentence listar"); :};
 sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
 
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("if solo "); :};
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET CLOSE_CURLY_BRACKET {: System.out.println("If "); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("If "); :} ELSE OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: System.out.println("Else"); :};
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET {: pila.add(polacaInversa.size()); :}  pvi {: 
+    System.out.println("comienza if");
+:};
+
+pvi ::= OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: 
+    polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+1));
+    System.out.println("if solo ");
+:};
+
+pvi ::= OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET ELSE {:
+    polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
+    polacaInversa.add("BI");
+    polacaInversa.add("#");
+    pila.add(polacaInversa.size());
+:}
+ OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET 
+{: 
+    polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+1));
+    System.out.println("Else"); 
+:};
+
+pvi ::= OPEN_CURLY_BRACKET CLOSE_CURLY_BRACKET ELSE {:
+    polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
+    polacaInversa.add("BI");
+    polacaInversa.add("#");
+    pila.add(polacaInversa.size());
+:}
+ OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET 
+{: 
+    polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+1));
+    System.out.println("Else"); 
+:};
 
 condition ::= comparation {:
     System.out.println("Condition "); 
 :};
-condition ::= condition AND comparation {: System.out.println("Condition AND "); :};
-condition ::= condition OR comparation {: System.out.println("Condition OR "); :};
+condition ::= condition AND comparation {: 
+    polacaInversa.add("AND");
+    System.out.println("Condition AND "); 
+:};
+condition ::= condition OR comparation {: 
+    polacaInversa.add("OR");
+    System.out.println("Condition OR "); 
+:};
 condition ::= NOT comparation {:
+    polacaInversa.add("NOT");
     System.out.println("Condition NOT ");
 :};
 
 comparation ::= expression comparator expression {:
     System.out.println("Comparation");
+    insertarCond(elem);
 :};
 
 comparator ::= LESS_THAN {:
-    insertarCond("BGE");
+    elem="BGE";
     System.out.println("<"); 
 :};
 comparator ::= GREATER_THAN {:
-    insertarCond("BLE");
+    elem="BLE";
     System.out.println(">");
 :};
 comparator ::= EQUAL {:
-    insertarCond("BNE");
+    elem="BNE";
     System.out.println("=="); 
 :};
 comparator ::= NOT_EQUAL {:
-    insertarCond("BEQ");
+    elem="BEQ";
     System.out.println("!="); 
 :};
 comparator ::= LESS_THAN_EQUAL {:
-    insertarCond("BGT");
+    elem="BGT";
     System.out.println("<="); 
 :};
 comparator ::= GREATER_THAN_EQUAL {:
-    insertarCond("BLT");
+    elem="BLT";
     System.out.println(">=");
 :};
 
@@ -261,8 +299,10 @@ term ::= factor {:
 :};
 
 
-// ESTE NO SE SI ES CORRECTO QUE ESTE...
-factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(id.toString()); :};
+factor ::= IDENTIFIER:id  {:
+    System.out.println("Id: " + id);
+    polacaInversa.add(id);
+:};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
     System.out.println("Int Constant: " + intConstant );
