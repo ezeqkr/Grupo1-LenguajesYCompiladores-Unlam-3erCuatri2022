@@ -45,6 +45,12 @@ action code
     public int aux=0;
 :}
 
+parser code
+{:
+    public ArrayList <String> getListaPolacaInversa() {
+            return action_obj.polacaInversa;
+        }
+:}
 
 
 // Terminals
