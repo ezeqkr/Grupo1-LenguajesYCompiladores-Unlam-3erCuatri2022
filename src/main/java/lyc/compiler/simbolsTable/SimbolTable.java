@@ -21,6 +21,14 @@ public class SimbolTable {
 
   // Setter
   public void setSimbol(SimbolRow simbolRow) {
+
+    boolean simbolDuplicated = this.simbols.stream()
+              .filter(o -> o.getNombre().equals(simbolRow.getNombre()))
+              .findFirst().isPresent();
+    if(simbolDuplicated) {
+      System.out.println("\nError: simbolo duplicado: '" + simbolRow.getNombre() + "'\n");
+      System.exit(0);
+    }
     this.simbols.add(simbolRow);
   }
 
