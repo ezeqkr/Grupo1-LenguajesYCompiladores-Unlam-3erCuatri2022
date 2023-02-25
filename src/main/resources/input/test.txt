@@ -18,13 +18,24 @@ write("Adios mundo cruel")
 while (3 > a) 
 {a=a+1}
 
-if (3<a)
-{
-    o=4
-}
-
 if (3 == a){}
 else
 {
     a = b
 }
+
+if (3<a & b==4)
+{
+    b=4
+}
+
+if (3<a || b==4)
+{
+    b=4
+}
+
+if (not 3<a)
+{
+    b=4
+}
+
