@@ -33,6 +33,7 @@ action code
                 System.out.print("|" + celda);
                 i++;
             }
+            System.out.print("|");
         }
 
 
