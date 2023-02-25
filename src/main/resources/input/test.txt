@@ -15,9 +15,6 @@ read(d)
 write(d)
 write("Adios mundo cruel")
 
-while (3 > a) 
-{a=a+1}
-
 if (3 == a){}
 else
 {
@@ -39,3 +36,8 @@ if (not 3<a)
     b=4
 }
 
+while (3 > a) 
+{a=a+1}
+
+while (3 > a & b==4) 
+{a=a+1}

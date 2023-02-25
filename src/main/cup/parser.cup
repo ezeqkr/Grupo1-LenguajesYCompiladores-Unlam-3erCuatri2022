@@ -22,7 +22,6 @@ action code
         polacaInversa.add("CMP");
         polacaInversa.add(elem);
         polacaInversa.add("#");
-        pila.add(polacaInversa.size());
     }
 
     public String elem;
@@ -251,7 +250,8 @@ object ::= expression;
 object ::= listar;
 
 iteration ::= WHILE {: polacaInversa.add("ET"); pila.add(polacaInversa.size()) ;:}
-OPEN_BRACKET condition CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {:
+OPEN_BRACKET condition {: pila.add(polacaInversa.size()); :}
+CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {:
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#"+pila.pop());
