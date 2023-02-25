@@ -1,7 +1,7 @@
 package lyc.compiler.simbolsTable;
 
 public enum DataType {
-    INTEGER,
+    INT,
     STRING,
     FLOAT
   }

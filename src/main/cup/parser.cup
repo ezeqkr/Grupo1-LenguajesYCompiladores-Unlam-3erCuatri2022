@@ -272,7 +272,7 @@ list_identifiers ::= list_identifiers COMA IDENTIFIER:id {:
 
 type ::= INT {:
 
-    simbolTable.addIdentifiers(this.identifiersList, DataType.INTEGER);
+    simbolTable.addIdentifiers(this.identifiersList, DataType.INT);
     System.out.println("Integer"); 
 :};
 type ::= FLOAT {:
@@ -314,18 +314,18 @@ factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(
 
 factor ::= INTEGER_CONSTANT:intConstant {:
     System.out.println("Int Constant: " + intConstant );
-    //simbolTable.add("_"+intConstant, "", intConstant.toString(), null);
+    simbolTable.add("_"+intConstant, "", intConstant.toString(), null);
     polacaInversa.add(intConstant.toString());
 :};
 factor ::= FLOAT_CONSTANT:floatConstant {:
     polacaInversa.add(floatConstant.toString());
-    //simbolTable.add("_"+floatConstant, "", floatConstant.toString(), null);
+    simbolTable.add("_"+floatConstant, "", floatConstant.toString(), null);
     System.out.println("Float Constant: " + floatConstant );
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
     final String str = stringConstant.toString().replace("\"", "");// elimiino las comillas del literal..
     polacaInversa.add(str);
-    //simbolTable.add("_"+str, "", str.toString(), null);
+    simbolTable.add("_"+str, "", str.toString(), null);
     System.out.println("String Constant: " + stringConstant );
 :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
