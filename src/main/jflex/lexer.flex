@@ -160,23 +160,23 @@ Div = "/"
 /* identifiers */
   {Identifier}                             {
                                               Validate.validateIdentifier(yytext());
-                                              addSymbol("IDENTIFIER", yytext());
+                                              // addSymbol("ID", yytext());
                                               return symbol(ParserSym.IDENTIFIER, yytext());
                                            }
   /* Constants */
   {IntegerConstant}                        {
                                               Validate.validateInt(yytext());
-                                              addSymbol("INTEGER_CONSTANT", yytext()); 
+                                              addSymbol("INT", yytext()); 
                                               return symbol(ParserSym.INTEGER_CONSTANT, yytext());                                              
                                            }
   {FloatConstant}                          {  Validate.validateFloat(yytext());
-                                              addSymbol("FLOAT_CONSTANT", yytext());
+                                              addSymbol("FLOAT", yytext());
                                               return symbol(ParserSym.FLOAT_CONSTANT, yytext()); }
   
   {CharacterConstant}                      {  return symbol(ParserSym.CHARACTER_CONSTANT, yytext()); }
   
   {StringConstant}                         {  Validate.validateString(yytext());
-                                              addSymbol("STRING_CONSTANT", yytext());
+                                              addSymbol("STRING", yytext());
                                               return symbol(ParserSym.STRING_CONSTANT, yytext()); }
 
 
