@@ -1,11 +1,30 @@
 init {
-    variable1 : Int
+    a : Int
+    b : Int
+    c : Float
+    d : String
 }
 
 a = 1
 b = 3
+c = 9.99
 
-a = "hola mundo"
-read(a)
-write(a)
+d = "hola mundo"
+write(d)
+read(d)
+write(d)
 write("Adios mundo cruel")
+
+while (3 > a) 
+{a=a+1}
+
+if (3<a)
+{
+    o=4
+}
+
+if (3 == a){}
+else
+{
+    a = b
+}
