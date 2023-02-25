@@ -71,33 +71,32 @@ public Boolean isInTable(String nombre) {
     return simbols.stream().anyMatch(symbol -> symbol.getId().equals(nombre));
 }
 
-  public void print() {    
-    int stride = this.simbols.size() / 4;
+  public void print() {
     System.out.println(
-      String.format("%20s %20s %20s %20s\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD"));
-    for (int row = 0; row < this.simbols.size() / 2; row++) {
-      System.out.println(
-        String.format("%20s %20s\n", 
-        this.simbols.get(row).getId(),
-        this.simbols.get(row + stride).getNombre(),
-        this.simbols.get(row + stride).getValor(),
-        this.simbols.get(row + stride).getLongitud()
+      String.format("%-20s%-20s%-20s%-20s\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD"));
+    
+      for (SimbolRow row : simbols) {
+        System.out.println(
+        String.format("%-20s%-20s%-20s%-20s",
+        row.getId(),
+        row.getNombre(),
+        row.getValor(),
+        ""
         ));
-    }
+      }
   }
 
   @Override
   public String toString() {
-    int stride = this.simbols.size() / 4;
-    String result = String.format("%20s %20s %20s %20s\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD");
-    for (int row = 0; row < this.simbols.size() / 2; row++) {
+    String result = String.format("%-20s%-20s%-20s%-20s\n", "NOMBRE", "TIPODATO", "VALOR", "LONGITUD");
+    for (SimbolRow row : simbols) {
       result += 
-        String.format("%20s %20s\n", 
-        this.simbols.get(row).getId(),
-        this.simbols.get(row + stride).getNombre(),
-        this.simbols.get(row + stride).getValor(),
-        this.simbols.get(row + stride).getLongitud()
-        );
+      String.format("%-20s%-20s%-20s%-20s\n",
+      row.getId(),
+      row.getNombre(),
+      row.getValor(),
+      ""
+      );
     }
     return result;
   }
