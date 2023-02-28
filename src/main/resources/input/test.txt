@@ -3,9 +3,10 @@ init {
 }
 
 a = 1
-b = 3
+b = 1
+c = 2
 
-a = "hola mundo"
-read(a)
-write(a)
-write("Adios mundo cruel")
+if (a > b & c > b)
+{
+    write("if 1")
+}

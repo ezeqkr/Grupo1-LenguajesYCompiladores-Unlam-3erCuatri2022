@@ -28,14 +28,20 @@ action code
             }
             i=1;
             for(String celda : polacaInversa){
-                System.out.print("|" + celda + "|");
+                System.out.print("|" + celda);
                 i++;
             }
+            System.out.print("|");
         }
-
 
 :}
 
+parser code
+{:
+    public ArrayList <String> getListaPolacaInversa() {
+            return action_obj.polacaInversa;
+        }
+:}
 
 
 // Terminals
