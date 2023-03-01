@@ -1,11 +1,11 @@
 init {
-    a,z : String
-    b,d : Int
+    b,z : String
+    a,d : Int
     c: Float
 }
 
-a = "hola mundo"
-b = 3
+b = "hola mundo"
+a = 3
 c = -9.99
 d = 4
 
@@ -21,8 +21,34 @@ d = 4
     a=3+100
 }*/
 
-if ( a > d) {
+/*if ( a > d) {
     if ( a > b) {
         a=3
     }
+    a=3
+} */
+
+/*if ( a > d) {
+    if ( a > b) {
+        a=3
+    }
+    a=3
 } 
+else
+{
+    a=4
+}*/
+
+/*while ( a < 10 )
+{
+    a=a+10
+}*/
+
+while ( a < 10 || d>0 )
+{
+    a=a+10
+    if (a>10)
+    {
+        b=""
+    }
+}
