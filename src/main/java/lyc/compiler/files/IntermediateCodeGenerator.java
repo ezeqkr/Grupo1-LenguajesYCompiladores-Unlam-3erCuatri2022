@@ -34,9 +34,5 @@ public class IntermediateCodeGenerator implements FileGenerator {
             }catch(Exception e) {
                 e.printStackTrace();
             }
-            finally {
-                bw.close();
-            }
-
     }
 }
