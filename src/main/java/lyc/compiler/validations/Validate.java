@@ -38,4 +38,10 @@ public class Validate {
             System.exit(0);
         }
     }
+
+//    public static void validateTypes(){
+//        if()
+//        throws new Exception("Error: tipos de datos no coinciden");
+//    }
+
 }

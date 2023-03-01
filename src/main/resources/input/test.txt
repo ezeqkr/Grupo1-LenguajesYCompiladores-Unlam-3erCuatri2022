@@ -5,5 +5,29 @@ init {
 }
 
 a = "hola mundo"
+
+b = 4
+
+/*
+a = "hola mundo"
 b = 3
 c = -9.99
+
+if (3<a & b==4)
+{
+    b=4
+}
+
+if (3<a || b==4)
+{
+    b=4
+}
+
+if( a > 3 )
+{
+    if( a < 2)
+    {
+        b = 1
+    }
+}
+*/
