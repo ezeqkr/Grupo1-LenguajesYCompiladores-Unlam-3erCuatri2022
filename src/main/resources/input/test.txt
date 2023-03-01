@@ -1,9 +1,23 @@
 init {
     a,z : String
-    b : Int
+    b,d : Int
     c: Float
 }
 
 a = "hola mundo"
 b = 3
 c = -9.99
+d = 4
+
+/*if ( a > b) {
+    a=3+100
+}*/
+
+/*if ( a > b || b < 100) {
+    a=3+100
+}*/
+
+/*if ( a > b & b < 100) {
+    a=3+100
+}*/
+
