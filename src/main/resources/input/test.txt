@@ -1,12 +1,9 @@
 init {
-    variable1 : Int
+    a,z : String
+    b : Int
+    c: Float
 }
 
-a = 1
-b = 1
-c = 2
-
-if (a > b & c > b)
-{
-    write("if 1")
-}
+a = "hola mundo"
+b = 3
+c = -9.99
