@@ -14,25 +14,25 @@ public class IntermediateCodeGenerator implements FileGenerator {
     @Override
     public void generate(FileWriter fileWriter) throws IOException {
 
-            BufferedWriter bw = null;
-            try {
+        BufferedWriter bw = null;
+        try {
 
-                bw = new BufferedWriter(fileWriter);
-                int i = 1;
+            bw = new BufferedWriter(fileWriter);
+            int i = 1;
 
-                for(String celda : lista){
-                    bw.write(i + ". " + celda + "\n");
-                    i++;
-                }
-                i=1;
-                for(String celda : lista){
-                    bw.write("|" + celda);
-                    i++;
-                }
-                bw.write("|");
-
-            }catch(Exception e) {
-                e.printStackTrace();
+            for(String celda : lista){
+                bw.write(i + ". " + celda + "\n");
+                i++;
             }
+            i=1;
+            for(String celda : lista){
+                bw.write("|" + celda);
+                i++;
+            }
+            bw.write("|");
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
