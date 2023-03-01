@@ -1,5 +1,9 @@
 package lyc.compiler.validations;
 
+import lyc.compiler.simbolsTable.DataType;
+
+import javax.xml.crypto.Data;
+
 public class Validate {
 
     final static int rangoString = 40;	
@@ -38,4 +42,11 @@ public class Validate {
             System.exit(0);
         }
     }
+
+    public static void validateTypes(DataType tipo1, DataType tipo2) throws Exception {
+        if( tipo1 != tipo2) {
+            throw new Exception("Error: tipos de datos no coinciden");
+        }
+    }
+
 }

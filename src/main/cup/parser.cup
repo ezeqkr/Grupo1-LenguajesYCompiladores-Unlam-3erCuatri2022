@@ -130,34 +130,49 @@ non terminal list_character;
 start with programa;
 programa ::= initialization block {:
     mostrar();
-    System.out.println("End");
+//    System.out.println("End");
 :};
 block ::= sentence {:
     //System.out.println(polacaInversa);
-    System.out.println("Block");
+//    System.out.println("Block");
 :};
 
 block ::= block sentence {: 
     //System.out.println(polacaInversa);
-    System.out.println("Blocks");
+//    System.out.println("Blocks");
 :};
 
-sentence ::= assignment {: System.out.println("Sentence asignacion"); :};
-sentence ::= selection {: System.out.println("Sentence seleccion"); :};
-sentence ::= iteration {: System.out.println("Sentence while"); :};
-sentence ::= escribir {: System.out.println("Sentence write"); :};
-sentence ::= leer {: System.out.println("Sentence read"); :};
+sentence ::= assignment {:
+//System.out.println("Sentence asignacion");
+:};
+sentence ::= selection {:
+//System.out.println("Sentence seleccion");
+:};
+sentence ::= iteration {:
+//System.out.println("Sentence while");
+:};
+sentence ::= escribir {:
+//System.out.println("Sentence write");
+:};
+sentence ::= leer {:
+//System.out.println("Sentence read");
+:};
 
 //sentence ::= listar {: System.out.println("Sentence listar"); :};
-sentence ::= muestrareversa {: System.out.println("Sentence muestrareversa"); :};
+sentence ::= muestrareversa {:
+//System.out.println("Sentence muestrareversa");
+:};
 
-selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET {: pila.add(polacaInversa.size()); :}  pvi {: 
-    System.out.println("comienza if");
+selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET {:
+    pila.add(polacaInversa.size());
+     :}
+pvi {:
+//    System.out.println("comienza if");
 :};
 
 pvi ::= OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: 
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+1));
-    System.out.println("if solo ");
+//    System.out.println("if solo ");
 :};
 
 pvi ::= OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET ELSE {:
@@ -181,11 +196,11 @@ pvi ::= OPEN_CURLY_BRACKET CLOSE_CURLY_BRACKET ELSE {:
  OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET 
 {: 
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+1));
-    System.out.println("Else"); 
+//    System.out.println("Else");
 :};
 
 condition ::= comparation {:
-    System.out.println("Condition "); 
+//    System.out.println("Condition ");
 :};
 
 condition ::= condition AND {: aux=polacaInversa.size()-1; :}
@@ -196,7 +211,7 @@ comparation {:
     polacaInversa.add("#"+(polacaInversa.size()+4));
     polacaInversa.add("BI");
     polacaInversa.add("#");    
-    System.out.println("Condition AND "); 
+//    System.out.println("Condition AND ");
 :};
 
 condition ::= condition OR {: 
@@ -213,51 +228,57 @@ comparation {:
     polacaInversa.set(aux,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#");    
-    System.out.println("Condition OR"); 
+//    System.out.println("Condition OR");
 :};
 
 condition ::= NOT comparation {:
     polacaInversa.set(polacaInversa.size()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#");    
-    System.out.println("Condition NOT ");
+//    System.out.println("Condition NOT ");
 :};
 
 comparation ::= expression comparator expression {:
-    System.out.println("Comparation");
+//    System.out.println("Comparation");
     insertarCond(elem);
 :};
 
 comparator ::= LESS_THAN {:
     elem="BGE";
-    System.out.println("<"); 
+//    System.out.println("<");
 :};
 comparator ::= GREATER_THAN {:
     elem="BLE";
-    System.out.println(">");
+//    System.out.println(">");
 :};
 comparator ::= EQUAL {:
     elem="BNE";
-    System.out.println("=="); 
+//    System.out.println("==");
 :};
 comparator ::= NOT_EQUAL {:
     elem="BEQ";
-    System.out.println("!="); 
+//    System.out.println("!=");
 :};
 comparator ::= LESS_THAN_EQUAL {:
     elem="BGT";
-    System.out.println("<="); 
+//    System.out.println("<=");
 :};
 comparator ::= GREATER_THAN_EQUAL {:
     elem="BLT";
-    System.out.println(">=");
+//    System.out.println(">=");
 :};
 
 assignment ::= IDENTIFIER:id ASSIG object {:
-    polacaInversa.add(id.toString());  // agrego el id a la lista
-    polacaInversa.add(":="); // agrego el operador de asignacion
-    System.out.println("Id: " + id);
-    System.out.println("Assignment"); 
+    try{
+//        validateTypes()
+        polacaInversa.add(id.toString());  // agrego el id a la lista
+        polacaInversa.add(":="); // agrego el operador de asignacion
+    }catch(Exception e){
+        System.out.println("Error en la asignacion");
+        e.printStackTrace();
+    }
+//    System.out.println("Id: " + id);
+//    System.out.println("Assignment");
 :};
 
 object ::= expression;
@@ -269,7 +290,7 @@ CLOSE_BRACKET OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {:
     polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#"+pila.pop());
-    System.out.println("While"); 
+//    System.out.println("While");
 :};
 
 
@@ -277,94 +298,106 @@ escribir ::= WRITE OPEN_BRACKET STRING_CONSTANT:str CLOSE_BRACKET{:
     final String strCte = str.toString().replace("\"", "");
     polacaInversa.add(strCte);
     polacaInversa.add("WRITE");
-    System.out.println("Write " + str);
+//    System.out.println("Write " + str);
 :};
 escribir ::= WRITE OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{:
     polacaInversa.add(id.toString());  // agrego el id a la lista
     polacaInversa.add("WRITE");
-    System.out.println("Write " + id); 
+//    System.out.println("Write " + id);
 :};
 
 leer ::= READ OPEN_BRACKET IDENTIFIER:id CLOSE_BRACKET{:
     polacaInversa.add(id.toString());  // agrego el id a la lista
     polacaInversa.add("READ");  
-    System.out.println("Read " + id); 
+//    System.out.println("Read " + id);
 :};
 
 
-initialization ::= INIT OPEN_CURLY_BRACKET declaration_block CLOSE_CURLY_BRACKET {: System.out.println("Initialization"); :};
-declaration_block ::= declaration_var {: System.out.println("Declaration"); :};
-declaration_block ::= declaration_block declaration_var {: System.out.println("Declaration"); :};
-declaration_var ::= list_identifiers DOS_PUNTOS type {: System.out.println("Declaration con coma"); :};
+initialization ::= INIT OPEN_CURLY_BRACKET declaration_block CLOSE_CURLY_BRACKET {:
+// System.out.println("Initialization");
+ :};
+declaration_block ::= declaration_var {:
+//System.out.println("Declaration");
+ :};
+declaration_block ::= declaration_block declaration_var {:
+//System.out.println("Declaration");
+ :};
+declaration_var ::= list_identifiers DOS_PUNTOS type {:
+// System.out.println("Declaration con coma");
+ :};
 
 list_identifiers ::= IDENTIFIER:id {:
-            System.out.println("Id: " + id);
+//            System.out.println("Id: " + id);
             this.identifiersList.add(id.toString());
 :};
 list_identifiers ::= list_identifiers COMA IDENTIFIER:id {: 
-    System.out.println("lista Ids: " + id); 
+//    System.out.println("lista Ids: " + id);
     this.identifiersList.add(id.toString());
     :};
 
 type ::= INT {:
 
     simbolTable.addIdentifiers(this.identifiersList, DataType.INT);
-    System.out.println("Integer"); 
+//    System.out.println("Integer");
 :};
 type ::= FLOAT {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.FLOAT);
-    System.out.println("Float"); 
+//    System.out.println("Float");
 :};
 type ::= STRING {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.STRING);
-    System.out.println("String"); 
+//    System.out.println("String");
 :};
 
 expression ::= expression PLUS term {:
     polacaInversa.add("+"); // agrego el operador de suma a la lista
-    System.out.println("+");
+//    System.out.println("+");
 :};
 expression ::= expression SUB term {: 
     polacaInversa.add("-"); // agrego el operador de resta a la lista
-    System.out.println("-"); 
+//    System.out.println("-");
 :};
 expression ::= term {:
-    System.out.println("Expression = Term"); 
+//    System.out.println("Expression = Term");
 :};
 
 term ::= term MULT factor {: 
     polacaInversa.add("*"); // agrego el operador de multiplicacion a la lista
-    System.out.println("*");
+//    System.out.println("*");
 :};
 term ::= term DIV factor {:
     polacaInversa.add("/"); // agrego el operador de division a la lista
-    System.out.println("/"); 
+//    System.out.println("/");
 :};
 term ::= factor {:
-    System.out.println("Term = factor"); 
+//    System.out.println("Term = factor");
 :};
 
 
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
-factor ::= IDENTIFIER:id  {: System.out.println("Id: " + id); polacaInversa.add(id.toString()); :};
+factor ::= IDENTIFIER:id  {:
+//System.out.println("Id: " + id);
+ polacaInversa.add(id.toString()); :};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
-    System.out.println("Int Constant: " + intConstant );
-    simbolTable.add("_"+intConstant, "", intConstant.toString(), null);
+//    System.out.println("Int Constant: " + intConstant );
+    simbolTable.add("_"+intConstant, DataType.INT, intConstant.toString(), null);
     polacaInversa.add(intConstant.toString());
 :};
 factor ::= FLOAT_CONSTANT:floatConstant {:
     polacaInversa.add(floatConstant.toString());
-    simbolTable.add("_"+floatConstant, "", floatConstant.toString(), null);
-    System.out.println("Float Constant: " + floatConstant );
+    simbolTable.add("_"+floatConstant, DataType.FLOAT, floatConstant.toString(), null);
+//    System.out.println("Float Constant: " + floatConstant );
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
     final String str = stringConstant.toString().replace("\"", "");// elimiino las comillas del literal..
     polacaInversa.add(str);
-    simbolTable.add("_"+str, "", str.toString(), null);
-    System.out.println("String Constant: " + stringConstant );
+    simbolTable.add("_"+str, DataType.STRING, str.toString(), null);
+//    System.out.println("String Constant: " + stringConstant );
 :};
-factor ::= OPEN_BRACKET expression CLOSE_BRACKET {: System.out.println("Factor = (Expression)"); :};
+factor ::= OPEN_BRACKET expression CLOSE_BRACKET {:
+//System.out.println("Factor = (Expression)");
+:};
 
 listar  ::= LIST_INDEX_OF_LAST {: polacaInversa.add("@retorno"); polacaInversa.add("0"); polacaInversa.add("="); polacaInversa.add("@indice"); polacaInversa.add("1"); polacaInversa.add("="); :}
             OPEN_BRACKET OPEN_SQUARE_BRACKET {: polacaInversa.add("@E"); :}
@@ -376,6 +409,8 @@ listado ::= listado COMA IDENTIFIER:id {: polacaInversa.add("@E"); polacaInversa
 listado ::= listado COMA INTEGER_CONSTANT:intConstant {: polacaInversa.add("@E"); polacaInversa.add(intConstant.toString()); insertarCond("BNE"); pila.add(polacaInversa.size()); polacaInversa.add("@retorno"); polacaInversa.add("@indice"); polacaInversa.add("="); polacaInversa.set( pila.pop()-1,"#"+(polacaInversa.size()+1) ); polacaInversa.add("@indice"); polacaInversa.add("@indice"); polacaInversa.add("+"); polacaInversa.add("1"); polacaInversa.add("="); System.out.println("Lista : "+ intConstant); :};
 
 
-muestrareversa ::= PRINT_REVERSE OPEN_BRACKET OPEN_SQUARE_BRACKET list_character CLOSE_SQUARE_BRACKET COMA INTEGER_CONSTANT:intConstant CLOSE_BRACKET{: polacaInversa.add("ET"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add(intConstant.toString()); insertarCond("BE"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add("@cant"); polacaInversa.add("1"); polacaInversa.add("-"); polacaInversa.add("="); polacaInversa.add("BI"); polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+2)); polacaInversa.add("#"+(pila.pop())); System.out.println("PrintReverseStringN"); :};
+muestrareversa ::= PRINT_REVERSE OPEN_BRACKET OPEN_SQUARE_BRACKET list_character CLOSE_SQUARE_BRACKET COMA INTEGER_CONSTANT:intConstant CLOSE_BRACKET{: polacaInversa.add("ET"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add(intConstant.toString()); insertarCond("BE"); pila.add(polacaInversa.size()); polacaInversa.add("@cant"); polacaInversa.add("@cant"); polacaInversa.add("1"); polacaInversa.add("-"); polacaInversa.add("="); polacaInversa.add("BI"); polacaInversa.set(pila.pop()-1,"#"+(polacaInversa.size()+2)); polacaInversa.add("#"+(pila.pop()));
+//System.out.println("PrintReverseStringN");
+ :};
 list_character ::= CHARACTER_CONSTANT:charConstant {: polacaInversa.add("@aux"); polacaInversa.add(charConstant.toString().replace("\'","")); System.out.println("Lista : "+ charConstant); :};
 list_character ::= list_character COMA CHARACTER_CONSTANT:charConstant {: polacaInversa.add("@aux"); polacaInversa.add("@aux"); polacaInversa.add(charConstant.toString().replace("\'","")); polacaInversa.add("+"); polacaInversa.add("="); System.out.println("Lista : "+ charConstant); :};
