@@ -199,12 +199,18 @@ comparation {:
     System.out.println("Condition AND "); 
 :};
 
-condition ::= condition OR {: aux=polacaInversa.size()-1; :}
+condition ::= condition OR {: 
+    polacaInversa.set(polacaInversa.size()-1,"#"+(polacaInversa.size()+3));
+    polacaInversa.add("BI");
+    polacaInversa.add("#");
+    aux=polacaInversa.size()-1;
+ :}
 comparation {:
-    polacaInversa.set(aux,"#"+(polacaInversa.size()+1));
+    
     polacaInversa.set(polacaInversa.size()-1,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#"+(polacaInversa.size()+4));
+    polacaInversa.set(aux,"#"+(polacaInversa.size()+3));
     polacaInversa.add("BI");
     polacaInversa.add("#");    
     System.out.println("Condition OR"); 
