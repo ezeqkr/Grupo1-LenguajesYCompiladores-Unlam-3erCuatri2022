@@ -14,7 +14,9 @@ public class GestorAssembler {
     public void generarAssembler(List<SimbolRow> TablaDeSimbolos , ArrayList<String> polacaInversa){
 
         Stack<String> pilaOperandos  = new Stack<String>();
-        Queue<String> colaEtiquetas  = new LinkedList<String>();
+//        Queue<String> colaEtiquetas  = new LinkedList<String>();
+        Stack<String> pilaEtiquetas  = new Stack<String>();
+
         Stack<Integer> pilaNroCelda = new Stack<Integer>();
 
         ArrayList<String> codigo = new ArrayList<String>(); // sentencias de programacion del programador
@@ -43,7 +45,7 @@ public class GestorAssembler {
         for(String celda : polacaInversa){
 
             if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
-                codigo.add(colaEtiquetas.remove() + ":");
+                codigo.add(pilaEtiquetas.pop() + ":");
                 pilaNroCelda.pop();
             }
             switch (celda){
@@ -133,22 +135,28 @@ public class GestorAssembler {
                 {
                     String etiqueta = "etiqueta" + (cantEtiquetas+1);
                     cantEtiquetas++;
-                    colaEtiquetas.add(etiqueta);
+                    pilaEtiquetas.add(etiqueta);
                     codigo.add(celda + " " + etiqueta);
                     codigo.add("");
                     break;
                 }
                 case "BI":
                 {
-                    codigo.add("BI " + colaEtiquetas.remove());
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
+                    cantEtiquetas++;
+                    pilaEtiquetas.add(etiqueta);
+                    String aux = pilaEtiquetas.pop();
+                    codigo.add("BI " + pilaEtiquetas.pop());
                     codigo.add("");
+                    codigo.add(aux + ":");
+                    pilaEtiquetas.add("etiqueta" + cantEtiquetas);
                     break;
                 }
                 case "ET":
                 {
                     String etiqueta = "etiqueta" + (cantEtiquetas+1);
                     cantEtiquetas++;
-                    colaEtiquetas.add(etiqueta);
+                    pilaEtiquetas.add(etiqueta);
                     codigo.add(etiqueta + ":");
                     codigo.add("");
                     break;
@@ -170,9 +178,9 @@ public class GestorAssembler {
             nroCelda++;
         }
 
-        if (!colaEtiquetas.isEmpty())
+        if (!pilaEtiquetas.isEmpty())
         {
-            codigo.add(colaEtiquetas.remove() + ":");
+            codigo.add(pilaEtiquetas.pop() + ":");
         }
 
         for(String instruccion : codigo){
