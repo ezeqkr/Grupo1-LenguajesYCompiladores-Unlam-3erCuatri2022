@@ -119,7 +119,7 @@ public class GestorAssembler {
                     codigo.add("FLD " + op1);
                     codigo.add("FLD " + op2);
                     codigo.add("FXCH");
-                    codigo.add("FCOMP");
+                    codigo.add("FCOM");
                     codigo.add("FSTSW AX");
                     codigo.add("SAHF");
                     break;
@@ -168,6 +168,11 @@ public class GestorAssembler {
                 }
             }
             nroCelda++;
+        }
+
+        if (!colaEtiquetas.isEmpty())
+        {
+            codigo.add(colaEtiquetas.remove() + ":");
         }
 
         for(String instruccion : codigo){
