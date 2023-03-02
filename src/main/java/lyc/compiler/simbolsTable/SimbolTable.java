@@ -37,7 +37,7 @@ public class SimbolTable {
   public List<SimbolRow> getSymbolList() {
     return this.simbols;
   }
-  
+
   public void add(String nombre, DataType tipo, String valor, Integer longitud) {
     if (!isInTable(nombre)) {
         this.simbols.add(new SimbolRow(nombre, tipo.toString(), valor, longitud));
@@ -81,7 +81,7 @@ public Boolean isInTable(String nombre) {
         row.getId(),
         row.getNombre(),
         row.getValor(),
-        ""
+        row.getLongitud() == null? "" : row.getLongitud()
         ));
       }
   }
@@ -94,8 +94,7 @@ public Boolean isInTable(String nombre) {
       String.format("%-20s%-20s%-20s%-20s\n",
       row.getId(),
       row.getNombre(),
-      row.getValor(),
-      ""
+      row.getValor(), row.getLongitud() == null? "" : row.getLongitud()
       );
     }
     return result;
