@@ -6,8 +6,7 @@ import java.util.*;
 
 public class GestorAssembler {
 
-    ArrayList<String> instrucciones = new ArrayList<String>();
-
+    ArrayList<String> listInst = new ArrayList<String>();
 
     public GestorAssembler(){
     }
@@ -18,52 +17,23 @@ public class GestorAssembler {
         Queue<String> colaEtiquetas  = new LinkedList<String>();
         Stack<Integer> pilaNroCelda = new Stack<Integer>();
 
-        ArrayList<String> codigoProgramador = new ArrayList<String>();
+        ArrayList<String> codigo = new ArrayList<String>(); // sentencias de programacion del programador
 
+        listInst.add(".MODEL LARGE");
+        listInst.add(".386");
+        listInst.add(".STACK 200h\n");
 
-        instrucciones.add("-------------- INICIO DE CODIGO ASSEMBLER ---------------");
-        instrucciones.add(".MODEL LARGE");
-        instrucciones.add(".386");
-        instrucciones.add(".STACK 200h\n");
-
-        ///tabla de simbolos
-        instrucciones.add(".DATA\n");
+        listInst.add(".DATA\n");
+        ///agrego la tabla de simbolos
         for(SimbolRow simbolo : TablaDeSimbolos){
-            instrucciones.add(String.format("%-20s %-5s %-30s", simbolo.getNombre(),"dd", simbolo.getValor()));
-
-
-
-
-
-
-
-
-
-
-
-
-
-            System.out.println("nombre" + simbolo.getNombre() + "valor" + simbolo.getValor());
-
-
-
-
-
-
-
-
-
-
-
-
-
+            listInst.add(String.format("%-20s %-5s %-30s", simbolo.getNombre(),"dd", simbolo.getValor()));
         }
 
         //cabecera de instrucciones
-        instrucciones.add("\n.CODE");
-        instrucciones.add("\nMOV AX, @DATA");
-        instrucciones.add("MOV DS, AX");
-        instrucciones.add("MOV ES, AX\n");
+        listInst.add("\n.CODE");
+        listInst.add("\nMOV AX, @DATA");
+        listInst.add("MOV DS, AX");
+        listInst.add("MOV ES, AX\n");
 
 
         //codigo del programador
@@ -73,7 +43,7 @@ public class GestorAssembler {
         for(String celda : polacaInversa){
 
             if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
-                codigoProgramador.add(colaEtiquetas.remove() + ":");
+                codigo.add(colaEtiquetas.remove() + ":");
                 pilaNroCelda.pop();
             }
             switch (celda){
@@ -81,9 +51,9 @@ public class GestorAssembler {
                 {
                     String op2 = pilaOperandos.pop();
                     String op1 = pilaOperandos.pop();
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FSTP " + op2);
-                    codigoProgramador.add("");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FSTP " + op2);
+                    codigo.add("");
                     break;
                 }
                 case "+":
@@ -92,11 +62,11 @@ public class GestorAssembler {
                     String op1 = pilaOperandos.pop();
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FLD " + op2);
-                    codigoProgramador.add("FADD");
-                    codigoProgramador.add("FSTP " + varAux);
-                    codigoProgramador.add("");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FLD " + op2);
+                    codigo.add("FADD");
+                    codigo.add("FSTP " + varAux);
+                    codigo.add("");
                     pilaOperandos.add(varAux);
                     break;
                 }
@@ -106,11 +76,11 @@ public class GestorAssembler {
                     String op1 = pilaOperandos.pop();
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FLD " + op2);
-                    codigoProgramador.add("FSUB");
-                    codigoProgramador.add("FSTP " + varAux);
-                    codigoProgramador.add("");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FLD " + op2);
+                    codigo.add("FSUB");
+                    codigo.add("FSTP " + varAux);
+                    codigo.add("");
                     pilaOperandos.add(varAux);
                     break;
                 }
@@ -120,11 +90,11 @@ public class GestorAssembler {
                     String op1 = pilaOperandos.pop();
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FLD " + op2);
-                    codigoProgramador.add("FDIV");
-                    codigoProgramador.add("FSTP " + varAux);
-                    codigoProgramador.add("");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FLD " + op2);
+                    codigo.add("FDIV");
+                    codigo.add("FSTP " + varAux);
+                    codigo.add("");
                     pilaOperandos.add(varAux);
                     break;
                 }
@@ -134,11 +104,11 @@ public class GestorAssembler {
                     String op1 = pilaOperandos.pop();
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FLD " + op2);
-                    codigoProgramador.add("FMUL");
-                    codigoProgramador.add("FSTP " + varAux);
-                    codigoProgramador.add("");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FLD " + op2);
+                    codigo.add("FMUL");
+                    codigo.add("FSTP " + varAux);
+                    codigo.add("");
                     pilaOperandos.add(varAux);
                     break;
                 }
@@ -146,12 +116,12 @@ public class GestorAssembler {
                 {
                     String op2 = pilaOperandos.pop();
                     String op1 = pilaOperandos.pop();
-                    codigoProgramador.add("FLD " + op1);
-                    codigoProgramador.add("FLD " + op2);
-                    codigoProgramador.add("FXCH");
-                    codigoProgramador.add("FCOMP");
-                    codigoProgramador.add("FSTSW AX");
-                    codigoProgramador.add("SAHF");
+                    codigo.add("FLD " + op1);
+                    codigo.add("FLD " + op2);
+                    codigo.add("FXCH");
+                    codigo.add("FCOMP");
+                    codigo.add("FSTSW AX");
+                    codigo.add("SAHF");
                     break;
                 }
                 case "BLE":
@@ -164,14 +134,14 @@ public class GestorAssembler {
                     String etiqueta = "etiqueta" + (cantEtiquetas+1);
                     cantEtiquetas++;
                     colaEtiquetas.add(etiqueta);
-                    codigoProgramador.add(celda + " " + etiqueta);
-                    codigoProgramador.add("");
+                    codigo.add(celda + " " + etiqueta);
+                    codigo.add("");
                     break;
                 }
                 case "BI":
                 {
-                    codigoProgramador.add("BI " + colaEtiquetas.remove());
-                    codigoProgramador.add("");
+                    codigo.add("BI " + colaEtiquetas.remove());
+                    codigo.add("");
                     break;
                 }
                 case "ET":
@@ -179,8 +149,8 @@ public class GestorAssembler {
                     String etiqueta = "etiqueta" + (cantEtiquetas+1);
                     cantEtiquetas++;
                     colaEtiquetas.add(etiqueta);
-                    codigoProgramador.add(etiqueta + ":");
-                    codigoProgramador.add("");
+                    codigo.add(etiqueta + ":");
+                    codigo.add("");
                     break;
                 }
                 default: {
@@ -200,42 +170,23 @@ public class GestorAssembler {
             nroCelda++;
         }
 
-        ///hago esto para que no se me rompa la logica agregando el codigo de la cabecera y etc
-        for(String instruccion : codigoProgramador){
-            instrucciones.add(instruccion);
+        for(String instruccion : codigo){
+            listInst.add(instruccion);
         }
 
-//        System.out.println("**************** MOSTRANDO POLACA /**********************");
-//        int i = 1;
-//        for(String celda : polacaInversa){
-//            System.out.println(i + " - " + celda);
-//            i++;
-//        }
-//        System.out.println("**************** FIN DE LA POLACA /**********************");
+        listInst.add("\nMOV AX, 4C00h");
+        listInst.add("INT 21h");
+        listInst.add("END");
 
-//        System.out.println("**************** MOSTRANDO PILA /**********************");
-//        while(!pilaOperandos.isEmpty()){
-//            System.out.println(pilaOperandos.pop());
-//        }
-//        System.out.println("**************** FIN DE LA PILA /**********************");
-
-        //pie de fin de codigo
-        instrucciones.add("\nMOV AX, 4C00h");
-        instrucciones.add("INT 21h");
-        instrucciones.add("END");
-
-        instrucciones.add("-------------- FIN DE CODIGO ASSEMBLER ---------------");
-
-
-        ///mostrando TODAS las instrucciones (incluye cabecera y etc)
-        for(String instruccion : instrucciones){
+        System.out.println("############# CODIGO ASSEMBLER #############");
+        for(String instruccion : listInst){
             System.out.println(instruccion);
 
         }
     }
 
-    public ArrayList<String> getInstrucciones(){
-        return instrucciones;
+    public ArrayList<String> getListInst(){
+        return listInst;
     }
 
 

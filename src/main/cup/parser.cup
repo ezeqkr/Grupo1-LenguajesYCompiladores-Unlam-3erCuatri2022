@@ -29,7 +29,7 @@ action code
     public String elem;
 
     public void mostrar(){
-            System.out.println("---MOSTRANDO POLACA INVERSA------");
+            System.out.println("############# POLACA INVERSA #############");
             int i = 1;
 
             for(String celda : polacaInversa){
@@ -41,7 +41,7 @@ action code
                 System.out.print("|" + celda);
                 i++;
             }
-            System.out.print("|");
+            System.out.print("| \n");
         }
 
     public int aux=0;
@@ -56,7 +56,7 @@ parser code
         return action_obj.simbolTable.getListaSimbolos();
         }
     public ArrayList<String> getInstrucciones(){
-            return action_obj.gestorAssembler.getInstrucciones();
+            return action_obj.gestorAssembler.getListInst();
         }
 
 :}
