@@ -30,6 +30,33 @@ public class GestorAssembler {
         instrucciones.add(".DATA\n");
         for(SimbolRow simbolo : TablaDeSimbolos){
             instrucciones.add(String.format("%-20s %-5s %-30s", simbolo.getNombre(),"dd", simbolo.getValor()));
+
+
+
+
+
+
+
+
+
+
+
+
+
+            System.out.println("nombre" + simbolo.getNombre() + "valor" + simbolo.getValor());
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         //cabecera de instrucciones

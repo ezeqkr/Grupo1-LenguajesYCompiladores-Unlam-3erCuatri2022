@@ -7,8 +7,8 @@ public class SimbolRow {
     private String valor; 
     private Integer longitud;
 
-    public SimbolRow(String id, String nombre, String valor, Integer longitud) {
-        this.id = id;
+    public SimbolRow(String nombre, String tipo, String valor, Integer longitud) {
+        this.id = tipo;
         this.nombre = nombre;
         this.valor = valor;
         this.longitud = longitud;
