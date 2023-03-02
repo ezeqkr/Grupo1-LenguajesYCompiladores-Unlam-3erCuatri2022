@@ -48,9 +48,6 @@ public class SimbolRow {
     }
 
     public Integer getLongitud() {
-        if (longitud == null) {
-            return longitud;
-        }
         return longitud;
     }
 
