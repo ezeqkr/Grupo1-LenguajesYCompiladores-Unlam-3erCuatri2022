@@ -44,7 +44,7 @@ public class Validate {
     }
 
     public static void validateTypes(DataType tipo1, DataType tipo2) throws Exception {
-        if( tipo1 != tipo2) {
+        if( tipo1 != tipo2 ) {
             throw new Exception("Error: tipos de datos no coinciden");
         }
     }

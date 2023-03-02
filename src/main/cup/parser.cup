@@ -178,6 +178,7 @@ selection ::= IF OPEN_BRACKET condition CLOSE_BRACKET {:
      :}
 pvi {:
 //    System.out.println("comienza if");
+//    polacaInversa.add("ET");
 :};
 
 pvi ::= OPEN_CURLY_BRACKET block CLOSE_CURLY_BRACKET {: 

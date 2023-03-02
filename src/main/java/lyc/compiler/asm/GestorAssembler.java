@@ -131,24 +131,30 @@ public class GestorAssembler {
                 case "BEQ":
                 case "BNE":
                 {
-                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
-                    cantEtiquetas++;
-                    colaEtiquetas.add(etiqueta);
-                    codigo.add(celda + " " + etiqueta);
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1); // etiqueta 1 // etiqueta 2
+                    cantEtiquetas++;  // 1 // 2
+                    colaEtiquetas.add(etiqueta); // cola = [etiqueta1] // cola = [etiqueta1, etiqueta2]
+                    codigo.add(celda + " " + etiqueta); // BLE etiqueta1 // BNE etiqueta2
                     codigo.add("");
                     break;
                 }
                 case "BI":
                 {
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1); 
+                    cantEtiquetas++;
+                    colaEtiquetas.add(etiqueta); 
+                    String aux = colaEtiquetas.remove();
                     codigo.add("BI " + colaEtiquetas.remove());
                     codigo.add("");
+                    codigo.add(aux + ":");
+                    colaEtiquetas.add("etiqueta" + cantEtiquetas);
                     break;
                 }
                 case "ET":
                 {
-                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
-                    cantEtiquetas++;
-                    colaEtiquetas.add(etiqueta);
+                    String etiqueta = "etiqueta" + (colaEtiquetas.size()); // etiqueta 2: 
+                    cantEtiquetas++;//3
+                    colaEtiquetas.add(etiqueta); //etiqueta
                     codigo.add(etiqueta + ":");
                     codigo.add("");
                     break;
