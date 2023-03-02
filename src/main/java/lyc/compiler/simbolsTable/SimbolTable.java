@@ -68,7 +68,7 @@ public class SimbolTable {
 
 
 public Boolean isInTable(String nombre) {
-    return simbols.stream().anyMatch(symbol -> symbol.getId().equals(nombre));
+    return simbols.stream().anyMatch(symbol -> symbol.getNombre().equals(nombre));
 }
 
   public void print() {
@@ -78,8 +78,8 @@ public Boolean isInTable(String nombre) {
       for (SimbolRow row : simbols) {
         System.out.println(
         String.format("%-20s%-20s%-20s%-20s",
-        row.getId(),
         row.getNombre(),
+        row.getId(),
         row.getValor(),
         row.getLongitud() == null? "" : row.getLongitud()
         ));
