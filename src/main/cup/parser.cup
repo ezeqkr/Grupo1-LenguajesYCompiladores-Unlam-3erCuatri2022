@@ -7,6 +7,7 @@ import java.util.*;
 import lyc.compiler.simbolsTable.SimbolTable;
 import lyc.compiler.simbolsTable.SimbolRow;
 import lyc.compiler.simbolsTable.DataType;
+import lyc.compiler.asm.*;
 
 class Parser;
 
@@ -16,7 +17,8 @@ action code
     public SimbolTable simbolTable = SimbolTable.getSingletonInstance();
     public ArrayList<String> identifiersList = new ArrayList();
     public ArrayList<String> polacaInversa = new ArrayList<>();
-    public Stack<Integer> pila = new Stack<>();    
+    public Stack<Integer> pila = new Stack<>();
+    public GestorAssembler gestorAssembler = new GestorAssembler();
     
     public void insertarCond(String elem){
         polacaInversa.add("CMP");
@@ -50,6 +52,13 @@ parser code
     public ArrayList <String> getListaPolacaInversa() {
             return action_obj.polacaInversa;
         }
+    public List<SimbolRow> getListaSimbolos() {
+        return action_obj.simbolTable.getListaSimbolos();
+        }
+    public ArrayList<String> getInstrucciones(){
+            return action_obj.gestorAssembler.getInstrucciones();
+        }
+
 :}
 
 
@@ -130,6 +139,7 @@ non terminal list_character;
 start with programa;
 programa ::= initialization block {:
     mostrar();
+    gestorAssembler.generarAssembler(getListaSimbolos(),getListaPolacaInversa());
 //    System.out.println("End");
 :};
 block ::= sentence {:

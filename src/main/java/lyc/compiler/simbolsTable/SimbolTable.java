@@ -34,7 +34,7 @@ public class SimbolTable {
     this.simbols.add(simbolRow);
   }
 
-  public List<SimbolRow> getSymbolList() {
+  public List<SimbolRow> getListaSimbolos() {
     return this.simbols;
   }
 

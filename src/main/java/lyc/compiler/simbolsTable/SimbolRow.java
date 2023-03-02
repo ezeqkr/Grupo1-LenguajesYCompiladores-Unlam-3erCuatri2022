@@ -36,6 +36,7 @@ public class SimbolRow {
         this.nombre = nombre;
     }
 
+
     public String getValor() {
         if (valor == null) {
             return "";
