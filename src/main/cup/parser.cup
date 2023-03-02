@@ -43,6 +43,7 @@ action code
         }
 
     public int aux=0;
+    public boolean esString= false;
 :}
 
 parser code
@@ -269,8 +270,19 @@ comparator ::= GREATER_THAN_EQUAL {:
 :};
 
 assignment ::= IDENTIFIER:id ASSIG object {:
-    try{
+
+    if(!simbolTable.isInTable(id.toString()))System.out.println("No esta en la tabla");
+    if(esString)
+    {
+        System.out.println("ERROR EN LA ASIGNACIÓN");
+        esString= false;
+    }
+    polacaInversa.add(id.toString());  // agrego el id a la lista
+    polacaInversa.add(":="); // agrego el operador de asignacion
+
+    /*try{
 //        validateTypes()
+        
         polacaInversa.add(id.toString());  // agrego el id a la lista
         polacaInversa.add(":="); // agrego el operador de asignacion
     }catch(Exception e){
@@ -279,6 +291,7 @@ assignment ::= IDENTIFIER:id ASSIG object {:
     }
 //    System.out.println("Id: " + id);
 //    System.out.println("Assignment");
+*/
 :};
 
 object ::= expression;
@@ -377,22 +390,28 @@ term ::= factor {:
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
 factor ::= IDENTIFIER:id  {:
 //System.out.println("Id: " + id);
- polacaInversa.add(id.toString()); :};
+    polacaInversa.add(id.toString());
+    esString= false;
+    if(!simbolTable.isInTable(id.toString()))System.out.println("No esta Inicializada esta variable"); 
+:};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
 //    System.out.println("Int Constant: " + intConstant );
     simbolTable.add("_"+intConstant, DataType.INT, intConstant.toString(), null);
     polacaInversa.add(intConstant.toString());
+    esString= false;
 :};
 factor ::= FLOAT_CONSTANT:floatConstant {:
     polacaInversa.add(floatConstant.toString());
     simbolTable.add("_"+floatConstant, DataType.FLOAT, floatConstant.toString(), null);
+    esString= false;
 //    System.out.println("Float Constant: " + floatConstant );
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
     final String str = stringConstant.toString().replace("\"", "");// elimiino las comillas del literal..
     polacaInversa.add(str);
     simbolTable.add("_"+str, DataType.STRING, str.toString(), null);
+    esString= true;
 //    System.out.println("String Constant: " + stringConstant );
 :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {:
