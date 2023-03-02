@@ -5,13 +5,19 @@ init {
 }
 
 b = "hola mundo"
-a = "hola mundo"
+
 a = 3
 c = -9.99
 d = 4
 x = 1
 e = 0
 
+/*a = "hola mundo"
+b = 4
+a = b
+b = a 
+a = 2 + "hola"
+*/
 /*
 if ( a > d) {
     a=3+100

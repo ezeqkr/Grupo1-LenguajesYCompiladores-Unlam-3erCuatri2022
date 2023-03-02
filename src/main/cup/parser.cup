@@ -283,6 +283,14 @@ assignment ::= IDENTIFIER:id ASSIG object {:
         //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
         esString= false;
     }
+
+    if(!esString & listStrings.contains(id.toString()))
+    {
+        System.out.println("ERROR: QUIERE ASIGNAR A UNA VARIABLE STRING UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        esString= false;
+    }
+
     polacaInversa.add(id.toString());  // agrego el id a la lista
     polacaInversa.add(":="); // agrego el operador de asignacion
     /*
@@ -408,6 +416,7 @@ factor ::= IDENTIFIER:id  {:
     polacaInversa.add(id.toString());
     esString= false;
     if(!simbolTable.isInTable(id.toString()))System.out.println("No esta Inicializada esta variable"); 
+    if(listStrings.contains(id.toString()))esString= true;
 :};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
