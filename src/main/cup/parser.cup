@@ -48,6 +48,7 @@ action code
 
     public int aux=0;
     public boolean esString= false;
+    public boolean band= false;
 :}
 
 parser code
@@ -243,9 +244,17 @@ condition ::= NOT comparation {:
 //    System.out.println("Condition NOT ");
 :};
 
-comparation ::= expression comparator expression {:
+comparation ::= expression {:if(esString)band=true;:} comparator expression {:
 //    System.out.println("Comparation");
+    if((esString & band == false) || (!esString & band == true))
+    {
+        System.out.println("ERROR: QUIERE COMPARAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        esString= false;
+    }
+
     insertarCond(elem);
+    band = false;
 :};
 
 comparator ::= LESS_THAN {:
