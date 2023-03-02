@@ -5,6 +5,7 @@ init {
 }
 
 b = "hola mundo"
+a = "hola mundo"
 a = 3
 c = -9.99
 d = 4

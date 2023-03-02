@@ -17,6 +17,10 @@ action code
     public ArrayList<String> identifiersList = new ArrayList();
     public ArrayList<String> polacaInversa = new ArrayList<>();
     public Stack<Integer> pila = new Stack<>();    
+    public ArrayList<String> listAux = new ArrayList<String>();
+    public ArrayList<String> listStrings;
+    public ArrayList<String> listInt;
+    public ArrayList<String> listFloat;
     
     public void insertarCond(String elem){
         polacaInversa.add("CMP");
@@ -270,17 +274,19 @@ comparator ::= GREATER_THAN_EQUAL {:
 :};
 
 assignment ::= IDENTIFIER:id ASSIG object {:
-
-    if(!simbolTable.isInTable(id.toString()))System.out.println("No esta en la tabla");
-    if(esString)
+    //System.out.println (listStrings);
+    //System.out.println (listInt);
+    //System.out.println (listFloat);
+    if(esString & ! listStrings.contains(id.toString()))
     {
-        System.out.println("ERROR EN LA ASIGNACIÓN");
+        System.out.println("ERROR: QUIERE ASIGNAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
         esString= false;
     }
     polacaInversa.add(id.toString());  // agrego el id a la lista
     polacaInversa.add(":="); // agrego el operador de asignacion
-
-    /*try{
+    /*
+    try{
 //        validateTypes()
         
         polacaInversa.add(id.toString());  // agrego el id a la lista
@@ -342,24 +348,33 @@ declaration_var ::= list_identifiers DOS_PUNTOS type {:
 list_identifiers ::= IDENTIFIER:id {:
 //            System.out.println("Id: " + id);
             this.identifiersList.add(id.toString());
+            listAux.add(id.toString());
 :};
 list_identifiers ::= list_identifiers COMA IDENTIFIER:id {: 
 //    System.out.println("lista Ids: " + id);
     this.identifiersList.add(id.toString());
+    listAux.add(id.toString());
     :};
 
 type ::= INT {:
 
     simbolTable.addIdentifiers(this.identifiersList, DataType.INT);
+    listInt = new ArrayList<String>(listAux);
+    listAux.clear();
 //    System.out.println("Integer");
 :};
 type ::= FLOAT {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.FLOAT);
 //    System.out.println("Float");
+    listFloat = new ArrayList<String>(listAux);
+    listAux.clear();
+    
 :};
 type ::= STRING {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.STRING);
 //    System.out.println("String");
+    listStrings = new ArrayList<String>(listAux);
+    listAux.clear();
 :};
 
 expression ::= expression PLUS term {:
