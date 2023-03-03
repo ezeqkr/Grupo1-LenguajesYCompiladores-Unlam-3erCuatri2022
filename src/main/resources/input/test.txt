@@ -12,8 +12,11 @@ d = 4
 x = 1
 e = 0
 
-h = 4
-
+/*Validaciones y Errores en uso de variables no inicializadas*/
+/*
+h=0
+a = h+4
+*/
 /*Validaciones y Errores en asignación*/
 /*a = "hola mundo"
 b = 4

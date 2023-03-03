@@ -292,7 +292,14 @@ comparator ::= GREATER_THAN_EQUAL {:
 //    System.out.println(">=");
 :};
 
-assignment ::= IDENTIFIER:id ASSIG object {:
+assignment ::= IDENTIFIER:id {:
+    if (!(listStrings.contains(id)||listFloat.contains(id)||listInt.contains(id)))
+    {
+        System.out.println("ERROR: QUIERE UTILIZAR UNA VARIABLE QUE NO FUE ASIGNADA");
+        System.exit(-1);
+    }
+    :}
+    ASSIG object {:
     if(esString & ! listStrings.contains(id.toString()))
     {
         System.out.println("ERROR: QUIERE ASIGNAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
@@ -416,12 +423,17 @@ term ::= factor {:
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
 factor ::= IDENTIFIER:id  {:
     esString= false;
-    System.out.println("ENTREEEEEEEEEE");
+    if (!(listStrings.contains(id)||listFloat.contains(id)||listInt.contains(id)))
+    {
+        System.out.println("ERROR: QUIERE UTILIZAR UNA VARIABLE QUE NO FUE ASIGNADA");
+        System.exit(-1);
+    }
     polacaInversa.add(id.toString()); 
     if(listStrings.contains(id.toString()))esString= true;
  :};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
+
 //    System.out.println("Int Constant: " + intConstant );
     simbolTable.add("_"+intConstant, DataType.INT, intConstant.toString(), null);
     polacaInversa.add(intConstant.toString());
