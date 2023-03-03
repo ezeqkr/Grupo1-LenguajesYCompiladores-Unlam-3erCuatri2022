@@ -456,7 +456,7 @@ factor ::= OPEN_BRACKET expression CLOSE_BRACKET {:
 //System.out.println("Factor = (Expression)");
 :};
 
-listar  ::= LIST_INDEX_OF_LAST {: polacaInversa.add("@retorno"); polacaInversa.add("0"); polacaInversa.add("="); polacaInversa.add("@indice"); polacaInversa.add("1"); polacaInversa.add("="); :}
+listar  ::= LIST_INDEX_OF_LAST {: this.identifiersList.add("@retorno"); this.identifiersList.add("@E");this.identifiersList.add("@indice"); polacaInversa.add("@retorno"); simbolTable.addIdentifiers(this.identifiersList, DataType.INT);polacaInversa.add("0"); polacaInversa.add("="); polacaInversa.add("@indice"); polacaInversa.add("1"); polacaInversa.add("="); :}
             OPEN_BRACKET OPEN_SQUARE_BRACKET {: polacaInversa.add("@E"); :}
             expression   {: polacaInversa.add("="); :}
             CLOSE_SQUARE_BRACKET COMA OPEN_SQUARE_BRACKET listado CLOSE_SQUARE_BRACKET CLOSE_BRACKET{: polacaInversa.add("@retorno"); System.out.println("ListIndexOfLast"); :};
