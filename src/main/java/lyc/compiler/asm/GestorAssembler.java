@@ -42,7 +42,6 @@ public class GestorAssembler {
         int cantVariablesAuxiliares = 0;
         int cantEtiquetas = 0;
         int nroCelda = 1;
-        boolean NroCeldaB = false;
         for(String celda : polacaInversa){
 
             //if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
