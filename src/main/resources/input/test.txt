@@ -4,9 +4,95 @@ init {
     c: Float
 }
 
+/*b = "hola mundo" NO FUNCIONA*/
+
+a = 3
+/*c = -9.99 NO FUNCIONA*/
+d = 4
 x = 1
-b = 2
-a = 2
+e = 0
+
+/*Validaciones y Errores en uso de variables no inicializadas*/
+/*
+h=0
+a = h+4
+*/
+/*Validaciones y Errores en asignación*/
+/*a = "hola mundo"
+b = 4
+a = b
+b = a 
+a = 2 + "hola"
+*/
+/*Validaciones y Errores en comparación*/
+/*if (a > b) {
+    a=3
+}
+if (b > a) {
+    a=3
+}
+*/
+
+
+if ( a > d) {
+    a=3+100
+}
+
+
+/*
+if ( a > d || d < 100) {
+    a=3+100
+}
+*/
+
+/*
+if ( a > d & d < 100) {
+    a=3+100
+}
+*/
+
+/*
+if ( a > d) {
+    if ( a > b) {
+        a=3
+    }
+    a=3
+} 
+*/
+
+/*
+if ( a > d) {
+    if ( a > b) {
+        a=3
+    }
+    a=3
+}
+else
+{
+    a=4
+}
+*/
+
+/*while ( a < 10 )
+{
+    a=a+10
+}
+*/
+
+/*
+while ( a < 10 || d>0 )
+{
+    a=a+10
+    if (a>10)
+    {
+        b="hola"
+    }
+    d=d+10
+}
+*/
+
+
+/*a = 2
 d = 2
 
 x = ListIndexOfLast([x+1], [a, b, 3, d])

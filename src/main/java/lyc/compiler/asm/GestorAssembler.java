@@ -42,6 +42,7 @@ public class GestorAssembler {
         int cantVariablesAuxiliares = 0;
         int cantEtiquetas = 0;
         int nroCelda = 1;
+        boolean esNum = false;
         for(String celda : polacaInversa){
 
             //if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
@@ -54,7 +55,29 @@ public class GestorAssembler {
                 case ":=":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     codigo.add("FLD " + op1);
                     codigo.add("FSTP " + op2);
                     codigo.add("");
@@ -63,7 +86,29 @@ public class GestorAssembler {
                 case "+":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
                     codigo.add("FLD " + op1);
@@ -77,7 +122,29 @@ public class GestorAssembler {
                 case "-":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
                     codigo.add("FLD " + op1);
@@ -91,7 +158,29 @@ public class GestorAssembler {
                 case "/":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
                     codigo.add("FLD " + op1);
@@ -105,7 +194,29 @@ public class GestorAssembler {
                 case "*":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     String varAux = "@aux" + (cantVariablesAuxiliares+1);
                     cantVariablesAuxiliares++;
                     codigo.add("FLD " + op1);
@@ -119,7 +230,29 @@ public class GestorAssembler {
                 case "CMP":
                 {
                     String op2 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op2);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op2 = "_"+op2;
+                        esNum = false;
+                    }
                     String op1 = pilaOperandos.pop();
+                    try {
+                        Integer.parseInt(op1);
+                        esNum = true;
+                    } catch (NumberFormatException excepcion) {
+                        esNum = false;
+                    }
+                    if(esNum)
+                    {
+                        op1 = "_"+op1;
+                        esNum = false;
+                    }
                     codigo.add("FLD " + op1);
                     codigo.add("FLD " + op2);
                     codigo.add("FXCH");
