@@ -6,9 +6,9 @@ init {
 
 /*b = "hola mundo" NO FUNCIONA*/
 
-
+a = 3
 /*c = -9.99 NO FUNCIONA*/
-
+d = 4
 x = 1
 e = 0
 
@@ -92,11 +92,11 @@ while ( a < 10 || d>0 )
 */
 
 
-a = 2
+/*a = 2
 d = 2
 
 x = ListIndexOfLast([x+1], [a, e, 3, d])
-
+*/
 
 /*
 PrintReverseStringN(['d','l','r','o','w',' ','o','l','l','e','h'], 2)
