@@ -1,6 +1,6 @@
 init {
-    b,z : String
-    a,d,x,e : Int
+    z : String
+    a,d,x,e,b : Int
     c: Float
 }
 
@@ -92,12 +92,7 @@ while ( a < 10 || d>0 )
 */
 
 
-/*a = 2
+/*a = 2*/
 d = 2
 
-x = ListIndexOfLast([x+1], [a, e, 3, d])
-*/
-
-/*
-PrintReverseStringN(['d','l','r','o','w',' ','o','l','l','e','h'], 2)
-*/
+x = ListIndexOfLast([x+1], [a, b, 3, d])
