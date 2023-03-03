@@ -4,15 +4,9 @@ init {
     c: Float
 }
 
-if ( a > b ) {
-         a = 4
-}else{
-         if ( a == 3){
-               a = 5
-         }else{
-              a=2
-              a = 3
-        }
-}
+x = 1
+b = 2
+a = 2
+d = 2
 
-a = 6
+x = ListIndexOfLast([x+1], [a, b, 3, d])

@@ -48,7 +48,6 @@ public class GestorAssembler {
                 while(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
                     codigo.add(pilaEtiquetas.pop() + ":");
                     pilaNroCelda.pop();
-                    codigo.add(pilaNroCelda.toString());
                 }
             //}
             switch (celda){
@@ -155,11 +154,6 @@ public class GestorAssembler {
                     pilaEtiquetas.add(aux);// PILA = [etiqueta2]
                     break;
                 }
-                // case "ENDIF":
-                // {
-                //     codigo.add("pilaEtiquetas.peek()");
-                //     break;
-                // }
                 case "ET":
                 {
                     String etiqueta = "etiqueta" + (cantEtiquetas+1); // etiqueta
@@ -174,7 +168,6 @@ public class GestorAssembler {
                         int nroCeldaSalto = Integer.parseInt(celda.substring(1));
                         if(nroCeldaSalto >= nroCelda){
                             pilaNroCelda.add(nroCeldaSalto);
-                            codigo.add("agrego un salto");
 //                            System.out.println("STACKKKKKKKKKKK " + nroCeldaSalto);
                         }
                     }
