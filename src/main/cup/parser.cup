@@ -259,6 +259,7 @@ comparation ::= expression {:if(esString)band=true;:} comparator expression {:
     if((esString & band == false) || (!esString & band == true))
     {
         System.out.println("ERROR: QUIERE COMPARAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
+        System.exit(-1);
         //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
         esString= false;
     }
@@ -296,12 +297,14 @@ assignment ::= IDENTIFIER:id ASSIG object {:
     {
         System.out.println("ERROR: QUIERE ASIGNAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
         //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        System.exit(-1);
         esString= false;
     }
     if(!esString & listStrings.contains(id.toString()))
     {
         System.out.println("ERROR: QUIERE ASIGNAR A UNA VARIABLE STRING UNA VARIABLE CON OTRO TIPO DE DATO");
         //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        System.exit(-1);
         esString= false;
     }
     polacaInversa.add(id.toString());  // agrego el id a la lista
@@ -412,10 +415,9 @@ term ::= factor {:
 
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
 factor ::= IDENTIFIER:id  {:
-//System.out.println("Id: " + id);
- polacaInversa.add(id.toString()); 
     esString= false;
-    if(!simbolTable.isInTable(id.toString()))System.out.println("No esta Inicializada esta variable");
+    System.out.println("ENTREEEEEEEEEE");
+    polacaInversa.add(id.toString()); 
     if(listStrings.contains(id.toString()))esString= true;
  :};
 
