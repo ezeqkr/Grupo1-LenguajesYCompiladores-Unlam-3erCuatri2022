@@ -19,7 +19,11 @@ action code
     public ArrayList<String> polacaInversa = new ArrayList<>();
     public Stack<Integer> pila = new Stack<>();
     public GestorAssembler gestorAssembler = new GestorAssembler();
-    
+    public ArrayList<String> listAux = new ArrayList<String>();
+    public ArrayList<String> listStrings;
+    public ArrayList<String> listInt;
+    public ArrayList<String> listFloat;
+
     public void insertarCond(String elem){
         polacaInversa.add("CMP");
         polacaInversa.add(elem);
@@ -45,6 +49,8 @@ action code
         }
 
     public int aux=0;
+    public boolean esString= false;
+    public boolean band= false;
 :}
 
 parser code
@@ -248,9 +254,16 @@ condition ::= NOT comparation {:
 //    System.out.println("Condition NOT ");
 :};
 
-comparation ::= expression comparator expression {:
+comparation ::= expression {:if(esString)band=true;:} comparator expression {:
 //    System.out.println("Comparation");
+    if((esString & band == false) || (!esString & band == true))
+    {
+        System.out.println("ERROR: QUIERE COMPARAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        esString= false;
+    }
     insertarCond(elem);
+    band = false;
 :};
 
 comparator ::= LESS_THAN {:
@@ -279,16 +292,20 @@ comparator ::= GREATER_THAN_EQUAL {:
 :};
 
 assignment ::= IDENTIFIER:id ASSIG object {:
-    try{
-//        validateTypes()
-        polacaInversa.add(id.toString());  // agrego el id a la lista
-        polacaInversa.add(":="); // agrego el operador de asignacion
-    }catch(Exception e){
-        System.out.println("Error en la asignacion");
-        e.printStackTrace();
+    if(esString & ! listStrings.contains(id.toString()))
+    {
+        System.out.println("ERROR: QUIERE ASIGNAR UN STRING A UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        esString= false;
     }
-//    System.out.println("Id: " + id);
-//    System.out.println("Assignment");
+    if(!esString & listStrings.contains(id.toString()))
+    {
+        System.out.println("ERROR: QUIERE ASIGNAR A UNA VARIABLE STRING UNA VARIABLE CON OTRO TIPO DE DATO");
+        //throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
+        esString= false;
+    }
+    polacaInversa.add(id.toString());  // agrego el id a la lista
+    polacaInversa.add(":="); // agrego el operador de asignacion       
 :};
 
 object ::= expression;
@@ -338,25 +355,34 @@ declaration_var ::= list_identifiers DOS_PUNTOS type {:
 
 list_identifiers ::= IDENTIFIER:id {:
 //            System.out.println("Id: " + id);
-            this.identifiersList.add(id.toString());
+    this.identifiersList.add(id.toString());
+    listAux.add(id.toString());
+
 :};
 list_identifiers ::= list_identifiers COMA IDENTIFIER:id {: 
 //    System.out.println("lista Ids: " + id);
     this.identifiersList.add(id.toString());
+    listAux.add(id.toString());
     :};
 
 type ::= INT {:
 
     simbolTable.addIdentifiers(this.identifiersList, DataType.INT);
 //    System.out.println("Integer");
+    listInt = new ArrayList<String>(listAux);
+    listAux.clear();
 :};
 type ::= FLOAT {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.FLOAT);
 //    System.out.println("Float");
+    listFloat = new ArrayList<String>(listAux);
+    listAux.clear();
 :};
 type ::= STRING {:
     simbolTable.addIdentifiers(this.identifiersList, DataType.STRING);
 //    System.out.println("String");
+    listStrings = new ArrayList<String>(listAux);
+    listAux.clear();
 :};
 
 expression ::= expression PLUS term {:
@@ -387,22 +413,29 @@ term ::= factor {:
 // ESTE NO SE SI ES CORRECTO QUE ESTE...
 factor ::= IDENTIFIER:id  {:
 //System.out.println("Id: " + id);
- polacaInversa.add(id.toString()); :};
+ polacaInversa.add(id.toString()); 
+    esString= false;
+    if(!simbolTable.isInTable(id.toString()))System.out.println("No esta Inicializada esta variable");
+    if(listStrings.contains(id.toString()))esString= true;
+ :};
 
 factor ::= INTEGER_CONSTANT:intConstant {:
 //    System.out.println("Int Constant: " + intConstant );
     simbolTable.add("_"+intConstant, DataType.INT, intConstant.toString(), null);
     polacaInversa.add(intConstant.toString());
+    esString= false;
 :};
 factor ::= FLOAT_CONSTANT:floatConstant {:
     polacaInversa.add(floatConstant.toString());
     simbolTable.add("_"+floatConstant, DataType.FLOAT, floatConstant.toString(), null);
 //    System.out.println("Float Constant: " + floatConstant );
+    esString= false;
 :};
 factor ::= STRING_CONSTANT:stringConstant {:
     final String str = stringConstant.toString().replace("\"", "");// elimiino las comillas del literal..
     polacaInversa.add(str);
     simbolTable.add("_"+str, DataType.STRING, str.toString(), str.length());
+    esString= true;
 //    System.out.println("String Constant: " + stringConstant );
 :};
 factor ::= OPEN_BRACKET expression CLOSE_BRACKET {:
