@@ -42,12 +42,16 @@ public class GestorAssembler {
         int cantVariablesAuxiliares = 0;
         int cantEtiquetas = 0;
         int nroCelda = 1;
+        boolean NroCeldaB = false;
         for(String celda : polacaInversa){
 
-            if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
-                codigo.add(pilaEtiquetas.pop() + ":");
-                pilaNroCelda.pop();
-            }
+            //if(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
+                while(!pilaNroCelda.isEmpty() && nroCelda == pilaNroCelda.peek()){
+                    codigo.add(pilaEtiquetas.pop() + ":");
+                    pilaNroCelda.pop();
+                    codigo.add(pilaNroCelda.toString());
+                }
+            //}
             switch (celda){
                 case ":=":
                 {
@@ -133,28 +137,33 @@ public class GestorAssembler {
                 case "BEQ":
                 case "BNE":
                 {
-                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
-                    cantEtiquetas++;
-                    pilaEtiquetas.add(etiqueta);
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1); // etiqueta1 // etiqueta 3
+                    cantEtiquetas++;//1 // 3
+                    pilaEtiquetas.add(etiqueta);//PILA = [etiqueta1] // PILA = [etiqueta3, etiqueta2]
                     codigo.add(celda + " " + etiqueta);
                     codigo.add("");
                     break;
                 }
                 case "BI":
                 {
-                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
-                    cantEtiquetas++;
-                    pilaEtiquetas.add(etiqueta);
-                    String aux = pilaEtiquetas.pop();
-                    codigo.add("BI " + pilaEtiquetas.pop());
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1); // etiqueta2
+                    cantEtiquetas++;//2
+                    pilaEtiquetas.add(etiqueta); // PILA = [etiqueta2, etiqueta1]
+                    String aux = pilaEtiquetas.pop(); // PILA = [etiqueta1]
+                    codigo.add("BI " + aux);
                     codigo.add("");
-                    codigo.add(aux + ":");
-                    pilaEtiquetas.add("etiqueta" + cantEtiquetas);
+                    codigo.add(pilaEtiquetas.pop()+ ":"); // PILA = []
+                    pilaEtiquetas.add(aux);// PILA = [etiqueta2]
                     break;
                 }
+                // case "ENDIF":
+                // {
+                //     codigo.add("pilaEtiquetas.peek()");
+                //     break;
+                // }
                 case "ET":
                 {
-                    String etiqueta = "etiqueta" + (cantEtiquetas+1);
+                    String etiqueta = "etiqueta" + (cantEtiquetas+1); // etiqueta
                     cantEtiquetas++;
                     pilaEtiquetas.add(etiqueta);
                     codigo.add(etiqueta + ":");
@@ -166,6 +175,7 @@ public class GestorAssembler {
                         int nroCeldaSalto = Integer.parseInt(celda.substring(1));
                         if(nroCeldaSalto >= nroCelda){
                             pilaNroCelda.add(nroCeldaSalto);
+                            codigo.add("agrego un salto");
 //                            System.out.println("STACKKKKKKKKKKK " + nroCeldaSalto);
                         }
                     }
