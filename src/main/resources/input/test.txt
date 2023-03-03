@@ -92,7 +92,7 @@ while ( a < 10 || d>0 )
 */
 
 
-/*a = 2
+/*a = 2*/
 d = 2
 
 x = ListIndexOfLast([x+1], [a, b, 3, d])
