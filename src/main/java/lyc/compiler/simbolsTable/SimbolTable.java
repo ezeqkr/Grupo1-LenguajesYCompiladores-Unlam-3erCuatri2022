@@ -56,7 +56,7 @@ public class SimbolTable {
         // must be called before you can call i.remove()
         String id = i.next();
         if (!(isInTable(id))) {
-            this.add(id, dataType, "-", null);
+            this.add(id, dataType, "?", null);
         } else {
             throw new Error("Error de sintaxis: la variable '" + id + "' ya habia sido declarada.");
         }
